@@ -28,4 +28,5 @@ jobs:
       # LaTeX build
       - name: Github Action for LaTeX
         uses: xu-cheng/latex-action@v3
-            
+        with:
+          root_file: WaveFunctionSimulation.tex
