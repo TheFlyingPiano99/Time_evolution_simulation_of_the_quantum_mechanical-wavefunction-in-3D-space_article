@@ -30,3 +30,4 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: WaveFunctionSimulation.tex
+          continue_on_error: true
