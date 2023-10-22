@@ -21,14 +21,6 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{mark2020webschrodinger}
-\BIBentryALTinterwordspacing
-G.~I. Márk, ``Web-schr\"odinger: Program for the interactive solution of the
-  time dependent and stationary two dimensional (2d) schr{\"o}dinger
-  equation,'' 2020. [Online]. Available:
-  \url{https://doi.org/10.48550/arXiv.2004.10046}
-\BIBentrySTDinterwordspacing
-
 \bibitem{KOSLOFF198335}
 \BIBentryALTinterwordspacing
 D.~Kosloff and R.~Kosloff, ``A fourier method solution for the time dependent
@@ -36,6 +28,14 @@ D.~Kosloff and R.~Kosloff, ``A fourier method solution for the time dependent
   Computational Physics}, vol.~52, no.~1, pp. 35--53, 1983. [Online].
   Available:
   \url{https://www.sciencedirect.com/science/article/pii/0021999183900153}
+\BIBentrySTDinterwordspacing
+
+\bibitem{mark2020webschrodinger}
+\BIBentryALTinterwordspacing
+G.~I. Márk, ``Web-schr\"odinger: Program for the interactive solution of the
+  time dependent and stationary two dimensional (2d) schr{\"o}dinger
+  equation,'' 2020. [Online]. Available:
+  \url{https://doi.org/10.48550/arXiv.2004.10046}
 \BIBentrySTDinterwordspacing
 
 \bibitem{schwabl2007quantum}
