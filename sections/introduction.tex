@@ -1,0 +1,30 @@
+\section{Introduction}
+
+Quantum mechanics (QM) describes the behaviour of physical systems \cite{schwabl2007quantum}.
+It is a common view that while Albert Einstein's General Relativity (GR) \cite{wald2010general} provides a model that accurately describes the laws of nature governing large scale phenomena, quantum theory is the best for small things.
+Although humanity has not yet accepted a single theory that would be capable of modelling both the small and the large thus bridging the gap between QM and GR, there are many features of both mentioned theories that require effort to master.
+In this writing we discuss a numeric approximation of the solution of one of QM-s fundamental equations,
+the Schrödinger equation.
+In non-relativistic QM the time dependent Schrödinger equation \cite{schrodinger1926} governs the time evolution of the wave function $\psi(\vec{r}; t)$, where $\vec{r}$ is the position vector and $t$ is the time.
+This equation can be written in the form \ref{eq:schrodinger}.
+\begin{equation}
+	\label{eq:schrodinger}
+	i\frac{\delta}{\delta{}t}\psi(\vec{r}; t) = H \psi(\vec{r}; t)
+\end{equation}
+Here $i$ is the complex unit, $\frac{\delta}{\delta{}t}$ is the partial differential operator with respect to time and $H$ is the $H$ is the Hamiltonian operator.
+Consequently the properties of the physical system are encoded in the Hamiltonian.
+If the potential is conservative, then $H = K + V$ is true, where $K$ is the kinetic energy operator and $V$ is the operator corresponding to the potential energy.
+For local potentials the $V$ operation simply stands for a multiplication with the $V(\vec{r})$ position dependent potential value.
+Generally solving equation~\ref{eq:schrodinger} analytically is not possible except for a few special cases such as the Hydrogen atom.
+
+Géza I. Márk \cite{mark2020webschrodinger} presents a method to approximate the solution of the Schrödinger equation.
+In his article he provides detailed description of separate methods for both the time dependent and the time independent equation's approximation.
+In the focus of their article is an implementation called Web-Schrödinger.
+This program is capable of approximating both the time dependent and the time independent equation for 2D spaces.
+In our work we have only dealt with the time dependent version.
+On the flip side, we implemented the method in 3D.
+
+
+
+
+

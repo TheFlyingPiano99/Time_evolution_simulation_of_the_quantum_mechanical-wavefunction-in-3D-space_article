@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[english,magyar]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[left=2.5cm, right=2.5cm]{geometry}
+
+\bibliographystyle{IEEEtran}
+
+%-------------------------------------------------------
+% Custom commands:
+
+\newcommand\todo[1]{
+\begin{LARGE}
+	\textcolor{red}{TODO: #1}\\
+\end{LARGE}
+}
+
+\newcommand{\probP}{\text{I\kern-0.15em P}}
+
+%-------------------------------------------------------
+
+
+\title{Wave Function Simulation}
+\author{Zoltán Simon\\[1cm]{\small Advisors: Dr. Balázs Csébfalvi}}
+
+\begin{document}
+	\selectlanguage{english}
+	
+	\maketitle
+	
+	\input{sections/abstract.tex}
+	
+	\input{sections/introduction.tex}
+	
+	\input{sections/our_method.tex}
+
+	\input{sections/our_implementation.tex}
+
+	\input{sections/results.tex}
+
+	\input{sections/discussion.tex}	
+
+	\input{sections/acknowledgement.tex}	
+
+	\bibliography{references.bib}
+	
+\end{document}
