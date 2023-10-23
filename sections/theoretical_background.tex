@@ -1,0 +1,62 @@
+\section{Theoretical background}
+\label{sec:theory}
+
+In this section we would like to give a brief introduction to the theory of \acrshort{qm}. In this summary of physics history we rely mainly on Tamás Geszti's \acrshort{qm} book \cite{geszti2007}.
+Since we have to start somewhere and we can not write about everything leading up to the formalization of \acrshort{qm}, we will start with Max Planck.
+He gave an explanation for the drop of in the spectrum of black-body radiation for high frequencies with constant temperature.
+He argued that each harmonic oscillator can only obtain energy in discrete energy elements of
+\begin{equation}
+	\label{eq:energy_quantum}
+	E_\delta = h\nu
+\end{equation}
+where $h$ is called the Planck constant and equals to $h = 6,6 \times 10^{-34}\;Js$
+and $\nu$ is the frequency of the oscillator.
+For convenience physicists tend to use $\hbar = \frac{h}{2\pi}$ reduced Planck constant.
+With this equation \ref{eq:energy_quantum} can be written in the form of
+\begin{equation}
+	E_\delta = \hbar\omega
+\end{equation}
+
+At this point it was known for physicists that a black-body can be modeled with electromagnetic harmonic oscillators with different modes that satisfy the boundary conditions of the box, consequently Planck was able to give a formula that accurately models the energy emission of black-bodies.
+The next advancement was in 1905, when Albert Einstein explained the photoelectric experiment.
+This experiment was first performed and documented by Fülöp Lénárd resulting in a Nobel prize for him.
+This experiment demonstrates that electrons can exit a metal electrode only by shining light on it.
+Here an important observation was made, which can be described by saying that the $E_{photo}$ energy of exited electron only depends on the color of light shining on the electrode.
+Einsteins discovery can be formally written in the following equation
+\begin{equation}
+	E_{photo} = h\nu - W
+\end{equation}
+where $W$ is the work required from the electron to leave the electrode.
+This is the second time the Planck constant appears in a physical formula.
+It suggests that the electron absorbs the energy of one single light quantum (photon, as we would call today).
+
+Ernest Rutherford experimented with shooting high energy positively charged $\alpha$-particles into materials and observing the refraction of these particles.
+He came to the conclusion that the largest portion of the mass of the materials is clumped into heavy positively charged cores and light negatively charged electrons surround the positive cores.
+According to his explanation the reason why these negatively charged particles do not fall into the positive core is that they orbit the core similarly to how planets do orbit the Sun.
+This however results in a paradox.
+Negatively charged orbiting particles should emit electromagnetic radiation thus quickly loosing energy and consequently falling into the core.
+
+Physicist have examined the color spectrum of atomic gases such as hydrogen.
+They observed that such gases exhibit a spectrum of discrete lines.
+To explain this strange phenomena in 1913, Niels Bohr made the connection between Planck's energy quantum hypothesis and Einstein's photon hypothesis.
+He stated that the electrons orbiting the atomic core occupy only orbitals with certain energy levels, and somehow evade the continuous transition between these orbitals.
+When they do make the transition between the discrete energy levels of $E_n$ and $E_m$ they emit or absorb photons based on whether they gained or lost energy.
+\begin{equation}
+	h\nu = E_m - E_n
+\end{equation}
+
+in 1924, Louis de Broglie recognized that an electron moving with momentum of $p=M_ev$ can also be thought of as the movement of some kind of a matter wave with $\lambda$ wavelength.
+\begin{equation}
+	\label{eq:de_broglie}
+	\lambda = \frac{h}{p}
+\end{equation}
+This also explains the discrete energy levels in Bohr's model.
+The allowed orbitals are those where the wave is a single-valued function thus closes into itself after one full rotation of $2\pi$ radians.
+If we use polar coordinates this means that the wave has the same amplitude for coordinates $\alpha$ and $\alpha + n2\pi$ where $n = 0, 1, 2, \dots$.
+Here we can further modify equation \ref{eq:de_broglie} and arrive to
+\begin{equation}
+	\vec{p} = \hbar \vec{k}
+\end{equation}
+where $\vec{k}$ is the wave vector. The amplitude of this vector equals to $\|\vec{k}\|= \frac{2\pi}{\lambda}$ and it's direction is perpendicular to the wave front.
+
+

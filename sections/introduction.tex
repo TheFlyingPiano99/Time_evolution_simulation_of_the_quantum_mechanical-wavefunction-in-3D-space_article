@@ -18,32 +18,27 @@ Quantum Computing promises newer before seen increase in computation capabilitie
 Although both of the last two fields mentioned await technological evolution in order to be commercially deployable due to a large amount of technical challenges, they both show that \acrshort{qm} has a lot of real life applications and the spectrum of these will only become more colorful as technology evolves.
 
 Inspired by the large amount of various fields previously enumerated we targeted the goal to recreate the behavior of quantum systems in a computer simulation.
-We 
 Such simulations are very useful for scientists. They use such methods to accurately model interaction between particles and various potential fields.
 In order to accomplish this goal we choose a method that uses the \acrfull{fft} to efficiently calculate the time development of the quantum mechanical wave function.
 In \acrshort{qm}, the wave function describes the state of a physical system. In the non-relativistic case, the time evolution of the wave function is described by the time-dependent Schrödinger equation \cite{schrodinger1926}.
-In 1982, D Kosloff and R Kosloff proposed a method \cite{KOSLOFF198335} to solve the time-dependent Schrödinger equation efficiently using Fourier transformation. In 2020, Géza István Márk published a paper \cite{mark2020webschrodinger} describing a computer program for the interactive solution of the time-dependent and stationary two-dimensional (2D) Schrödinger equation. Some details of quantum phenomena are only observable by calculating with all three spatial dimensions. We found it worth stepping out from the two-dimensional plane and investigating these phenomena in three dimensions. We implemented the said method for the three-dimensional case to simulate the time evolution of the wave function. We used our implementation to simulate typical quantum phenomena using wave packet dynamics. First, we tried the method on analytically describable cases, such as the simulation of the double-slit experiment, then we investigated the operation of flash memory. We used raytraced volumetric visualization to render the resulting probability density. In our work, we introduce the basics of wave packet dynamics in quantum mechanics. We describe the method in use in detail and showcase our simulation results.\\
+In 1982, D Kosloff and R Kosloff proposed a method \cite{KOSLOFF198335} to solve the time-dependent Schrödinger equation efficiently using Fourier transformation.
+In 2020, Géza István Márk published a paper \cite{mark2020webschrodinger} describing a computer program for the interactive solution of the time-dependent and stationary two-dimensional (2D) Schrödinger equation.
+Some details of quantum phenomena are only observable by calculating with all three spatial dimensions.
+We found it worth stepping out from the two-dimensional plane and investigating these phenomena in three dimensions.
+Not that Géza István Márk and his colleagues have not already used 3D calculations in their research work.
+The difference is that their implementation uses solely the \acrfull{cpu} of a computer.
+For visualization of the resulting probability density so far they used isosurface method.
+Our contribution mainly lays in leveraging the parallelisation potential of the modern \acrfull{gpu} thus significantly boosting the speed of the calculation by approximately a factor of 50 on our test hardware.
+We also apply state of the art volumetric visualization techniques to create pleasing and comprehensible visuals for analysis of the evolution of probability density in 3D space.
+We believe that by combining the knowledge available for computer visualization specialists and physicists we can arrive to something greater than the possibilities available if each of us would be working only in his or her own domain of expertise.
+We write our implementation with future extendibility in mind, since we would like to continue our work and develop a capable simulation platform that can be deployed as a tool for state of the art scientific research.
 
-In this writing we discuss a numeric approximation of the solution of one of QM-s fundamental equations,
-the Schrödinger equation.
-In non-relativistic QM the time dependent Schrödinger equation \cite{schrodinger1926} governs the time evolution of the wave function $\psi(\vec{r}; t)$, where $\vec{r}$ is the position vector and $t$ is the time.
-This equation can be written in the form \ref{eq:schrodinger}.
-\begin{equation}
-	\label{eq:schrodinger}
-	i\frac{\delta}{\delta{}t}\psi(\vec{r}; t) = H \psi(\vec{r}; t)
-\end{equation}
-Here $i$ is the complex unit, $\frac{\delta}{\delta{}t}$ is the partial differential operator with respect to time and $H$ is the $H$ is the Hamiltonian operator.
-Consequently the properties of the physical system are encoded in the Hamiltonian.
-If the potential is conservative, then $H = K + V$ is true, where $K$ is the kinetic energy operator and $V$ is the operator corresponding to the potential energy.
-For local potentials the $V$ operation simply stands for a multiplication with the $V(\vec{r})$ position dependent potential value.
-Generally solving equation~\ref{eq:schrodinger} analytically is not possible except for a few special cases such as the Hydrogen atom.
-
-Géza I. Márk \cite{mark2020webschrodinger} presents a method to approximate the solution of the Schrödinger equation.
-In his article he provides detailed description of separate methods for both the time dependent and the time independent equation's approximation.
-In the focus of their article is an implementation called Web-Schrödinger.
-This program is capable of approximating both the time dependent and the time independent equation for 2D spaces.
-In our work we have only dealt with the time dependent version.
-On the flip side, we implemented the method in 3D.
+In section \ref{sec:theory} of this article we start by discussing the theoretical background.
+Then in section \ref{sec:used_method} we proceed to describe the used Fourier method to simulate the wave function.
+In section \ref{sec:our_implementation} we provide an overview of the implementation details of our program.
+After this in section \ref{sec:results} we showcase our simulation results.
+Here we compare analytically describable simulation cases to the mathematical model.
+At the end in section \ref{sec:discussion} we summarize our results in a short discussion.
 
 
 

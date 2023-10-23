@@ -1,0 +1,50 @@
+\section{Used method}
+\label{sec:used_method}
+
+The time dependent Schrödinger equation as written in \ref{eq:schrodinger}, is a linear partial differential equation.
+The $H$ operator and a given $\psi(\vec{r}; t_0)$ initial state fully determines the $\psi(
+vec{r}; t)$ wave function.
+Formal solution of equation~\ref{eq:schrodinger} can be given in the form of equation~\ref{eq:schrodinger_formal_solution}.
+\begin{equation}
+	\label{eq:schrodinger_formal_solution}
+	\psi(\vec{r}; t) = U\psi(\vec{r}, t_0)\;\;\;\;\;\;\;\; U = e^{-iH(t-t_0)}
+\end{equation}
+Here $U$ is the time development operator.
+The exponent containing $H$ can not be trivially factored.
+We can use an approximation described in equation~\ref{eq:solution_approximation}.
+\begin{equation}
+	\label{eq:solution_approximation}
+	e^{-i(K + V)\delta{}t} \approx e^{-iK\delta{}t/2}e^{-iV\delta{}t}e^{-iK\delta{}t/2}
+\end{equation}
+The error of this approximation is $O\left[(\delta{}t)^3 \right]$.
+We have to consider this when designing the time resolution of the simulation.
+The evolution operator is now split into three consecutive steps.
+These are a free propagation for time $\delta{}t / 2$, a potential only propagation for $\delta{}t$ and another free propagation for $\delta{}t / 2$.
+Since the effect of $V$ is a multiplication with $V(\vec{r})$ we can write the potential propagator as a multiplication with $e^{-iV(\vec{r})\delta{}t}$.
+The effect of the free propagator is simple when applied in the $k$ momentum space.
+In this case it is simply a multiplication with $e^{i|k|^2\delta{}t/4}$.
+To use this formula we have to convert from real space to momentum space and backward.
+To do this we must calculate the Fourier transform of the wave function.
+On the computer this is approximated by calculating the Discrete Fourier Transform (DFT).
+DFT can be implemented with an algorithmic complexity of $O\left[n\,log(n)\right]$  with the Fast Fourier Transform (FFT) algorithm.
+This method utilises the symmetries naturally occurring while calculating the DFT by definition.
+Namely that you can reuse some values by pairing the odd and even indexed members of the input vector.
+
+Given a $\psi_n$ current state, the next state occurring after $\delta{}t$ time can be obtained by executing the following steps.
+\begin{enumerate}
+	\item{$\psi_n^{(1)} := FFT^{-1}\left[ P_{kinetic}(\delta{}t/2)\;FFT(\psi_n) \right]$}
+	\item{$\psi_n^{(2)} := P_{potential}(\delta{}t)\;\psi_n^{(1)}$}
+	\item{$\psi_{n+1} := FFT^{-1}\left[ P_{kinetic}(\delta{}t/2)\;FFT(\psi_n^{(2)}) \right]$}
+\end{enumerate}
+Here $P_{kinetic}(\delta{}t/2)$ is the previously discussed free propagator applied by multiplying with $e^{i|k|^2\delta{}t/4}$, and $P_{potential}(\delta{}t)$ is the potential propagator applied by multiplying with $e^{-iV(\vec{r})\delta{}t}$.
+
+To obtain a convergent and aliasing free simulation one must choose small enough $\delta{}x,\; \delta{}y$ grid resolution that is smaller than the \textit{de Broglie} wavelength of the simulated system.
+
+The output of the simulation is the probability density function of the simulated volume.
+This can be obtained by calculating the square of the absolute value of the wave function for each position as seen in equation~\ref{eq:probability_density}.
+\begin{equation}
+	\label{eq:probability_density}
+	p(\vec{r}; t) = |\psi(\vec{r}, t)|^2
+\end{equation}
+
+
