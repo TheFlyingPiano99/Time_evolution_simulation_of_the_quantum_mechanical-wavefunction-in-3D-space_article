@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage[english,magyar]{babel}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -14,6 +14,7 @@
 	pdftitle={WaveFunctionSimulation},
 	pdfpagemode=FullScreen,
 }
+\usepackage[acronym]{glossaries}
 
 
 \urlstyle{same}
@@ -36,13 +37,33 @@
 \title{Time evolution simulation of the quantum mechanical wave function in 3D space}
 \author{Zoltán Simon\\[1cm]{\small Advisors: Dr. Balázs Csébfalvi, Dr. Géza István Márk, Dr. Péter Vancsó}}
 
+\makeglossaries
+\newacronym{qm}{QM}{Quantum Mechanics}
+\newacronym{gr}{GR}{General Relativity}
+\newacronym{fft}{FFT}{Fast Fourier Transform}
+
 \begin{document}
 	\selectlanguage{english}
-	\thispagestyle{empty}
 	
 	\maketitle
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{"figures/preview_image.jpeg"}
+		\caption{Wave packet going through double-slit.}
+		\label{fig:penetrating_potential}
+	\end{figure}
+	\thispagestyle{empty}
+	\pagebreak
+	\pagenumbering{arabic}
+	
+	\tableofcontents
+	
+	\pagebreak
+
 	\input{sections/abstract.tex}
+
+	\pagebreak
 	
 	\input{sections/introduction.tex}
 	

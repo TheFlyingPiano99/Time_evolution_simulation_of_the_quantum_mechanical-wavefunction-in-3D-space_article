@@ -1,8 +1,29 @@
 \section{Introduction}
 
-Quantum mechanics (QM) describes the behaviour of physical systems \cite{schwabl2007quantum}.
-It is a common view that while Albert Einstein's General Relativity (GR) \cite{wald2010general} provides a model that accurately describes the laws of nature governing large scale phenomena, quantum theory is the best for small things.
-Although humanity has not yet accepted a single theory that would be capable of modelling both the small and the large thus bridging the gap between QM and GR, there are many features of both mentioned theories that require effort to master.
+In the first quarter of 20th century \acrfull{qm} opened a whole new window to understand our universe. Tamás Geszti in his book \cite{geszti2007} writes: learning \acrshort{qm} is part of the process of understanding the world, and the person who masters it, understands the world better.
+It is a common view that while Albert Einstein's \acrfull{gr} provides a model that accurately describes the laws of nature governing large scale phenomena \cite{wald2010general}, quantum theory excels at atomic scale.
+Although humanity has not yet accepted a single theory that would be capable of modeling both the small and large thus bridging the gap between \acrshort{qm} and \acrshort{gr}, there are many use-cases, where technology heavily depends on both theories.
+\acrshort{qm} can be used efficiently to model the behavior of atomic particles.
+It describes how electrons behave in the orbitals around atomic core and give an explanation for chemical reactions.
+It can be used to model the structure of molecules.
+\acrshort{qm} made possible for humanity the make use of the nuclear energy in power plants thus creating a new and efficient source of power.
+Computers --as we know them today-- wouldn't be possible without a deep understanding of various quantum phenomena.
+These systems make use of transistors \cite{Ross1998} which can also be thought of as a product of \acrshort{qm}.
+In nanotechnology it is crucial to make quantum mechanical calculations to predict --and in many cases explain-- the behavior of different nanostructures.
+One interesting field of study is the science of single-layer materials \cite{Zhuang2014}. These are also known as 2D materials.
+One such carbon structure is called graphene \cite{VANCSO2013101, Márk2016}.
+This single-layered structure conducts heat and electricity very efficiently thus raises high hopes in many when it comes to possible use-cases.
+Nowadays quantum information science is getting larger and larger audience \cite{imresandor2004}.
+Quantum Computing promises newer before seen increase in computation capabilities due to the massively parallel nature of quantum systems leveraging quantum superposition. Quantum Communication on the other hand opens new possibilities when it comes to secure information exchange with efficient channel encoding.
+Although both of the last two fields mentioned await technological evolution in order to be commercially deployable due to a large amount of technical challenges, they both show that \acrshort{qm} has a lot of real life applications and the spectrum of these will only become more colorful as technology evolves.
+
+Inspired by the large amount of various fields previously enumerated we targeted the goal to recreate the behavior of quantum systems in a computer simulation.
+We 
+Such simulations are very useful for scientists. They use such methods to accurately model interaction between particles and various potential fields.
+In order to accomplish this goal we choose a method that uses the \acrfull{fft} to efficiently calculate the time development of the quantum mechanical wave function.
+In \acrshort{qm}, the wave function describes the state of a physical system. In the non-relativistic case, the time evolution of the wave function is described by the time-dependent Schrödinger equation \cite{schrodinger1926}.
+In 1982, D Kosloff and R Kosloff proposed a method \cite{KOSLOFF198335} to solve the time-dependent Schrödinger equation efficiently using Fourier transformation. In 2020, Géza István Márk published a paper \cite{mark2020webschrodinger} describing a computer program for the interactive solution of the time-dependent and stationary two-dimensional (2D) Schrödinger equation. Some details of quantum phenomena are only observable by calculating with all three spatial dimensions. We found it worth stepping out from the two-dimensional plane and investigating these phenomena in three dimensions. We implemented the said method for the three-dimensional case to simulate the time evolution of the wave function. We used our implementation to simulate typical quantum phenomena using wave packet dynamics. First, we tried the method on analytically describable cases, such as the simulation of the double-slit experiment, then we investigated the operation of flash memory. We used raytraced volumetric visualization to render the resulting probability density. In our work, we introduce the basics of wave packet dynamics in quantum mechanics. We describe the method in use in detail and showcase our simulation results.\\
+
 In this writing we discuss a numeric approximation of the solution of one of QM-s fundamental equations,
 the Schrödinger equation.
 In non-relativistic QM the time dependent Schrödinger equation \cite{schrodinger1926} governs the time evolution of the wave function $\psi(\vec{r}; t)$, where $\vec{r}$ is the position vector and $t$ is the time.
