@@ -1,10 +1,40 @@
 \section{Used method}
 \label{sec:used_method}
 
-The time dependent Schrödinger equation as written in \ref{eq:schrodinger}, is a linear partial differential equation.
-The $H$ operator and a given $\psi(\vec{r}; t_0)$ initial state fully determines the $\psi(
-vec{r}; t)$ wave function.
-Formal solution of equation~\ref{eq:schrodinger} can be given in the form of equation~\ref{eq:schrodinger_formal_solution}.
+In our simulation we numerically solve the time dependent Schrödinger equation.
+There are multiple available algorithms for this task.
+A widely used category of solving strategies are the \acrfull{fdtd} methods.
+This approach is also widely adopted to simulate the solution of Maxwell equations \cite{maxwell1865, Ulf2001}.
+\acrfull{fdtdq} however exhibit numerical instability \cite{Soriano2004}.
+After a longer sequence of simulation steps the solutions diverge from the ground truth.
+There are various alterations of the base method.
+One such method was proposed by Min Zhu et al. \cite{Zhu2014} in the year 2014.
+Their algorithm is called the \acrfull{rkhofdtd}.
+In 2021, a follow up paper \cite{Zhu_Wang_2021} demonstrated the superiority of \acrshort{rkhofdtd} over the basic \acrshort{fdtdq} approach.
+In the same year Frederick Ira Moxley et al. \cite{MOXLEY20122434} proposed another method based on \acrshort{fdtdq}.
+These methods solve the majority of problems related to \acrshort{fdtdq}.
+
+However in our work we use a different approach.
+Back in 1982, D Kosloff and R Kosloff proposed a method \cite{KOSLOFF198335} to solve the time-dependent Schrödinger equation efficiently using Fourier transformation.
+The advantage of this algorithm is the high numerical stability of the time evolution step.
+In the adopted \acrshort{fft} method no signs of divergence are present even after a large number of simulation steps.
+The time development step of the algorithm has a time complexity of $\mathcal{O}(N\log N)$ since it only uses six \acrshort{fft} runs ($\mathcal{O}(N\log N)$ each) and three element wise multiplication between tensors ($\mathcal{O}(N)$ each).
+The amount of \acrshort{fft} runs and multiplications can be reduced further if we don't want to read the results of the time development in each step.
+A significant speed up can be reached by using parallelized implementation of the \acrshort{fft} algorithm as we did by using an efficient \acrshort{gpu} implementation.
+In the following part we would like to explain the \acrshort{fft} method in detail.
+
+The idea of the method is to discretize the space of the simulation and to construct anohter discretized space in which Hermitian operators of the original space are mapped into Hermitian operators. 
+
+
+
+
+
+
+
+
+
+
+
 \begin{equation}
 	\label{eq:schrodinger_formal_solution}
 	\psi(\vec{r}; t) = U\psi(\vec{r}, t_0)\;\;\;\;\;\;\;\; U = e^{-iH(t-t_0)}
