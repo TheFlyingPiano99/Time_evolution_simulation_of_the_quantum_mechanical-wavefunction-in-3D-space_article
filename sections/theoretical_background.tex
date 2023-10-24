@@ -111,4 +111,81 @@ By using the $E := \hbar \omega$ and $\hbar \vec{k} = \vec{p}$ substitutions for
 
 There are however significant differences between the classical and \acrshort{qm} model.
 The particle-analogy comes with it's own limits.
+In 1927, Werner Heisenberg formulated his uncertainty principle.
+This states that simultaneously the position and the momentum of a particle can not be determined exactly.
+Only with a specific $\Delta$ precision.
+The result can be writen in the form of equation \ref{eq:heisenberb_uncertainty}.
+\begin{equation}
+	\label{eq:heisenberb_uncertainty}
+	\Delta x \cdot \Delta p \geq \frac{\hbar}{2}
+\end{equation}
+Similar relation holds between time and energy.
+\begin{equation}
+	\label{}
+	\Delta t \cdot \Delta E \geq \frac{\hbar}{2}
+\end{equation}
+
+So far we know the that atomic particles exhibit wave-like behavior and in bounded systems they can absorb or release energy only in discrete quanta.
+These matter waves can interfere with each other and the superposition principle holds true.
+Along the way we obtained a seemingly satisfactory energy, momentum and velocity concept.
+One last step is to instead of real amplitudes we allow complex amplitudes.
+This solves the problem of energy conservation.
+
+All of these advancements led up to the formalization of the Schrödinger equation in 1926 by Erwin Schrödinger \cite{schrodinger1926}.
+Already in the 19th century on the field of optics it was a common practice to use linear partial differential equations to calculate light propagation.
+Linearity is a requirement for matter waves as well, since by the definition of superposition a general equation that aims to properly describe the behavior of matter waves must be satisfied by the simple waves and also by the linear combination of these waves.
+Let's write the $\Psi$ plane wave as a complex valued function
+\begin{equation}
+	\Psi(\vec{r}, t) = e^{i(\vec{k}\cdot\vec{r} - \omega t)} = e^{\frac{i}{\hbar}(\vec{p}\cdot\vec{r} - Et)}
+\end{equation}
+
+First let's assume that our wave is propagating in free space.
+The total energy of the particle consists only of kinetic part.
+\begin{equation}
+	\label{eq:kinetic_energy}
+	E=\frac{p^2}{2m}
+\end{equation}
+We don't know the equation for the wave function yet, but it must incorporate this relation between the energy and momentum.
+In the wave function both the energy and the momentum are in exponent.
+To express them we have to take the derivative of the function with respect to position and time.
+Operation of calculating the partial derivative with respect to position is often referred to as calculating the gradient vector and is denoted by the $\nabla$ ("nabla") symbol.
+\begin{equation}
+	\label{eq:derivative_of_wave_func}
+	\begin{split}
+		\frac{d}{dt}\Psi(\vec{r}, t) &= -\frac{i}{\hbar}E\;\Psi(\vec{r}, t)\\
+		\frac{\delta}{\delta\vec{r}}\Psi(\vec{r}, t) &= \nabla \Psi(\vec{r}, t) =	\frac{i}{\hbar}\vec{p}\;\Psi(\vec{r}, t)
+	\end{split}
+\end{equation}
+In the kinetic energy equation \ref{eq:kinetic_energy} we actually need the square of the magnitude of momentum.
+To calculate it we introduce the $\Delta = \vec{\nabla} \cdot \vec{\nabla}$ Laplace operator.
+By combining equation \ref{eq:kinetic_energy} and \ref{eq:derivative_of_wave_func} we can arrive to the following linear differential equation
+\begin{equation}
+	\label{eq:schrodinger_free_space}
+	i \hbar \frac{d}{dt}\Psi(\vec{r}, t) = - \frac{\hbar^2}{2m}\Delta\Psi(\vec{r}, t)
+\end{equation}
+This is the Schrödinger equation for matter wave propagating in free space.
+Let's generalize this by getting rid of the previous assumption that the total energy is solely kinetic.
+Now we allow an $V(\vec{r})$ localized potential energy to be an arbitrary function of location thus the total energy becomes
+\begin{equation}
+	\label{eq:hamilton_function}
+	E = \frac{p^2}{2m} + V(\vec{r}) = \mathcal{H}(\vec{p}, \vec{r})
+\end{equation}
+Here we introduced the $\mathcal{H}$ notation to express that this is a form of the so called Hamiltonian function named after William Rowan Hamilton who used his formalism to describe classical mechanics in the 19th century \cite{Hamilton1833}.
+Using equation \ref{eq:hamilton_function} to modify equation \ref{eq:schrodinger_free_space} we trivially arrive to the more general form of the Schrödinger equation
+\begin{equation}
+	\label{eq::schrodinger_general}
+	i \hbar \frac{d}{dt}\Psi(\vec{r}, t) = - \frac{\hbar^2}{2m}\Delta\Psi(\vec{r}, t) + V(\vec{r})\Psi(\vec{r}, t)
+\end{equation}
+We can see that on the left side we basically take the first derivative of the wave function with respect to the time and on the right side we let a $\hat{H} = \frac{\hbar^2}{2m}\Delta + V(\vec{r})$ operator affect the wave function.
+By solving this differential equation and specifying an initial state, we can predict the time development of a quantum mechanical wave function.
+
+The only remaining question also meaningful for our simulation is that how exactly should we interpret the resulting function?
+Whats the actual physical meaning behind the amplitude of the wave?
+Experiments show that the square of the absolute value of the complex amplitude is the probability density associated with the particle being found in a given infinitesimally small portion of space at a given time.
+For convenience and to be sound with probability theory we normalize the amplitude of the wave function so that the velocity of the particle being found "somewhere" in space equals $\probP = 1$.
+\begin{equation}
+	\label{eq:normalization}
+	\int_\mathcal{V} |\Psi(\vec{r}, t)|^2 \;d^3r = 1
+\end{equation}
+
 
