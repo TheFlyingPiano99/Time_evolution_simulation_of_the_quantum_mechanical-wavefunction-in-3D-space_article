@@ -68,3 +68,47 @@ This latter property was also true for electromagnetic waves and it's called the
 Please note that although we keep comparing electromagnetic waves with matter waves the two are different phenomena.
 Our goal with emphasizing the similarities is only to reinforce a possible intuition in those who are perhaps more familiar with the world of electromagnetism.
 
+The particle-like behavior of the wave is due to the superposition of waves with different frequencies forming peaks.
+These waves extinguish each other for the most part but at some position and time coordinates the amplitudes add up to larger amplitude.
+An example of this is demonstrated in figure \ref{fig:superposition}.
+\begin{figure}
+	\centering
+	\includegraphics{figures/Superposition of cosine waves.png}
+	\caption{Superposition of cosine waves with different wavelength: the superposition forms a peak at the $x = 0$ coordinate}
+	\label{fig:superposition}
+\end{figure}
+
+Let's call the amplitude of a matter wave with $k=\frac{2\pi}{\lambda}$ wave number $\Psi_k$. Then the formula of a plain wave propagating in positive $x$ direction can be described in the form of equation \ref{eq:plain_wave_k}.
+
+\begin{equation}
+	\label{eq:plain_wave_k}
+	\Psi_k(x, t) = sin(kx - \omega t)
+\end{equation}
+
+let's calculate the superposition of waves with different wave numbers! We assume that the angular velocity $omega(k)$ depends on the $k$ wave number and that the waves with different wave numbers have various $c(k)$ weights in the linear combination. This gives the following Fourier integral:
+\begin{equation}
+	\label{eq:combination_of_waves}
+	\Psi(x, t) = \int_k c(k) sin[kx - \omega(k)t]\; dk
+\end{equation}
+
+Analyzing this formula we can determine the propagation velocity of the amplitude peaks.
+In equation \ref{eq:combination_of_waves} the peaks form where and when the phase of the sine function is not dependent of the $k$ integration variable. With other words the derivative of the phase with respect to $k$ is zero.
+\begin{equation}
+	\label{eq:derivative_of_phase}
+	\frac{d}{dk}[kx - \omega(k)t] = x - \frac{d}{dk}\omega(k)t = 0
+\end{equation}
+
+By generalizing for all spatial coordinates and rearranging equation \ref{eq:derivative_of_phase} we get the group velocity of the wave.
+\begin{equation}
+	\label{eq:group_velocity}
+	\vec{v}_{group} = \frac{\delta \omega(\vec{k})}{\delta \vec{k}}
+\end{equation}
+By using the $E := \hbar \omega$ and $\hbar \vec{k} = \vec{p}$ substitutions for the energy and momentum we arrive to the classically known formula for a particle of mass $m$
+\begin{equation}
+	\label{eq:classical_group_velocity}
+	\vec{v}_{group} = \frac{\delta E(\vec{p}, \vec{r})}{\delta\vec{p}} = \frac{\delta}{\delta\vec{p}}\left[ \frac{\|\vec{p}\|^2}{2m} + V(\vec{r}) \right] = \frac{\vec{p}}{m}
+\end{equation}
+
+There are however significant differences between the classical and \acrshort{qm} model.
+The particle-analogy comes with it's own limits.
+
