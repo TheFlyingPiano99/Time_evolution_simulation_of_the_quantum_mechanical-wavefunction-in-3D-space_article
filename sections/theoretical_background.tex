@@ -174,9 +174,12 @@ Here we introduced the $\mathcal{H}$ notation to express that this is a form of 
 Using equation \ref{eq:hamilton_function} to modify equation \ref{eq:schrodinger_free_space} we trivially arrive to the more general form of the Schrödinger equation
 \begin{equation}
 	\label{eq::schrodinger_general}
-	i \hbar \frac{d}{dt}\Psi(\vec{r}, t) = - \frac{\hbar^2}{2m}\Delta\Psi(\vec{r}, t) + V(\vec{r})\Psi(\vec{r}, t)
+	\begin{split}
+		i \hbar \frac{d}{dt}\Psi(\vec{r}, t) &= - \frac{\hbar^2}{2m}\Delta\Psi(\vec{r}, t) + V(\vec{r})\Psi(\vec{r}, t)\\
+		\frac{d}{dt}\Psi(\vec{r}, t) &= -\frac{i}{\hbar}\hat{H}\Psi(\vec{r}, t)
+	\end{split}
 \end{equation}
-We can see that on the left side we basically take the first derivative of the wave function with respect to the time and on the right side we let a $\hat{H} = \frac{\hbar^2}{2m}\Delta + V(\vec{r})$ operator affect the wave function.
+We can see that on the left side we basically take the first derivative of the wave function with respect to the time and on the right side we let a $\hat{H} = -\frac{\hbar^2}{2m}\Delta + V(\vec{r})$ operator affect the wave function.
 By solving this differential equation and specifying an initial state, we can predict the time development of a quantum mechanical wave function.
 
 The only remaining question also meaningful for our simulation is that how exactly should we interpret the resulting function?

@@ -22,59 +22,124 @@ The time development step of the algorithm has a time complexity of $\mathcal{O}
 The amount of \acrshort{fft} runs and multiplications can be reduced further if we don't want to read the results of the time development in each step.
 A significant speed up can be reached by using parallelized implementation of the \acrshort{fft} algorithm as we did by using an efficient \acrshort{gpu} implementation.
 In the following part we would like to explain the \acrshort{fft} method in detail.
-
-The idea of the method is to discretize the space of the simulation and to construct anohter discretized space in which Hermitian operators of the original space are mapped into Hermitian operators. 
-
-
-
-
-
-
-
-
-
-
-
+Let's start by deriving the formal solution of the \ref{eq::schrodinger_general} differential equation.
 \begin{equation}
-	\label{eq:schrodinger_formal_solution}
-	\psi(\vec{r}; t) = U\psi(\vec{r}, t_0)\;\;\;\;\;\;\;\; U = e^{-iH(t-t_0)}
+	\label{eq:formal_solution}
+	\begin{split}
+		\int_{t_0}^t \frac{d}{d\tau}\Psi(\vec{r}, \tau) \; d\tau &= \int_{t_0}^t -\frac{i}{\hbar}\hat{H}\Psi(\vec{r}, \tau)\; d\tau\\
+		\Psi(\vec{r}, t) - \Psi(\vec{r}, t_0) &= \int_{t_0}^t -\frac{i}{\hbar}\hat{H}\Psi(\vec{r}, \tau)\; d\tau\\
+		&\;\:\vdots\\
+		\Psi(\vec{r}, t) &= e^{-\frac{i}{\hbar}\hat{H}(t - t_0)} \Psi(\vec{r}, t_0)
+	\end{split}
 \end{equation}
-Here $U$ is the time development operator.
-The exponent containing $H$ can not be trivially factored.
-We can use an approximation described in equation~\ref{eq:solution_approximation}.
+where $\Psi(\vec{r}, t_0)$ is a specified initial state and $\Psi(\vec{r}, t)$ is the state after some $\delta t = t - t_0$ time.
+The problematic part is the Hamiltonian operator in the exponent.
+The kinetic and potential operators can not be commuted in general, hence exponential can not be factored.
+Géza István Márk in his Web-Schrödinger simulator \cite{mark2020webschrodinger} decomposes the exponential by the symmetrical unitary product as shown in form \ref{eq:unitary_product}.
 \begin{equation}
-	\label{eq:solution_approximation}
-	e^{-i(K + V)\delta{}t} \approx e^{-iK\delta{}t/2}e^{-iV\delta{}t}e^{-iK\delta{}t/2}
+	\label{eq:unitary_product}
+	e^{-\frac{i}{\hbar}\hat{H}\delta t} = e^{-\frac{i}{\hbar}(\hat{K} + \hat{V})\delta t} \approx e^{-\frac{i}{\hbar}\hat{K}\delta t / 2}\; e^{-\frac{i}{\hbar}\hat{V}\delta t}\; e^{-\frac{i}{\hbar}\hat{K}\delta t / 2}
 \end{equation}
-The error of this approximation is $O\left[(\delta{}t)^3 \right]$.
-We have to consider this when designing the time resolution of the simulation.
-The evolution operator is now split into three consecutive steps.
-These are a free propagation for time $\delta{}t / 2$, a potential only propagation for $\delta{}t$ and another free propagation for $\delta{}t / 2$.
-Since the effect of $V$ is a multiplication with $V(\vec{r})$ we can write the potential propagator as a multiplication with $e^{-iV(\vec{r})\delta{}t}$.
-The effect of the free propagator is simple when applied in the $k$ momentum space.
-In this case it is simply a multiplication with $e^{i|k|^2\delta{}t/4}$.
-To use this formula we have to convert from real space to momentum space and backward.
-To do this we must calculate the Fourier transform of the wave function.
-On the computer this is approximated by calculating the Discrete Fourier Transform (DFT).
-DFT can be implemented with an algorithmic complexity of $O\left[n\,log(n)\right]$  with the Fast Fourier Transform (FFT) algorithm.
-This method utilises the symmetries naturally occurring while calculating the DFT by definition.
-Namely that you can reuse some values by pairing the odd and even indexed members of the input vector.
+The error of this approximation is $\mathcal{O}(\delta t^3)$ therefore we have to be careful with the selection of small enough time resolution.
+When the potential energy is localized the $\hat{V}$ operator is a simple multiplication with $V(\vec{r})$ function thus the middle part of the product is as follows
+\begin{equation}
+	\label{eq:potential_prop}
+	e^{-\frac{i}{\hbar}\hat{V}\delta t} \Psi = e^{-\frac{i}{\hbar}V(\vec{r})\delta t} \Psi
+\end{equation}
+The $\hat{K}$ kinetic operator involves calculating the spatial derivative of the wave function.
 
-Given a $\psi_n$ current state, the next state occurring after $\delta{}t$ time can be obtained by executing the following steps.
-\begin{enumerate}
-	\item{$\psi_n^{(1)} := FFT^{-1}\left[ P_{kinetic}(\delta{}t/2)\;FFT(\psi_n) \right]$}
-	\item{$\psi_n^{(2)} := P_{potential}(\delta{}t)\;\psi_n^{(1)}$}
-	\item{$\psi_{n+1} := FFT^{-1}\left[ P_{kinetic}(\delta{}t/2)\;FFT(\psi_n^{(2)}) \right]$}
-\end{enumerate}
-Here $P_{kinetic}(\delta{}t/2)$ is the previously discussed free propagator applied by multiplying with $e^{i|k|^2\delta{}t/4}$, and $P_{potential}(\delta{}t)$ is the potential propagator applied by multiplying with $e^{-iV(\vec{r})\delta{}t}$.
+Previously in equation \ref{eq:derivative_of_wave_func} we have seen that calculating the spatial gradient $\nabla \Psi(\vec{r}, t)$ yields multiplication by $\frac{i}{\hbar}\vec{p} = i\vec{k}$.
+We only need to get the value of the wave vector.
+This is when the Fourier transform comes into play which transforms between real space and momentum space.
+Following relation holds for the derivative of an arbitrary $f$ function and it's Fourier transform
+\begin{equation}
+	ik\mathcal{F}\{f\} = \mathcal{F}\{f'\}
+\end{equation}
+Taking the derivative in real space means multiplication by $ik$ imaginary wave number in momentum space.
+We work with the $\Delta = \nabla \cdot \nabla$ Laplace operator so we have to multiply by $(ik)^2 = -k^2$.
+By exploiting the linearity of Fourier transform we arrive to the following formula for the kinetic energy part of the Hamiltonian function
+\begin{equation}
+	\label{eq:kinetic_op}
+	\hat{K} \Psi = \frac{p^2}{2m}\Psi = -\frac{\hbar^2}{2m} \Delta \Psi = -\frac{\hbar^2}{2m}\mathcal{F}^{-1}
+	\{
+		-k^2\mathcal{F}\{\Psi\}
+	\}
+\end{equation}
+where $\mathcal{F}^{-1}$ is the inverse Fourier transform. In momentum space the $k$ wave number is trivially given as it can be thought of as the very coordinate the functions are parameterized with.
+Having that said, it is important to distinguish between $\nu$ frequency, $\lambda$ wavelength, $k$ wave number and even $\omega$ angular velocity.
+These relate as follows
+\begin{equation}
+	\label{eq:relation_of_dimensions}
+	k = \frac{2\pi}{\lambda} = \frac{2\pi\nu}{v_{group}} = \frac{\omega}{v_{group}}
+\end{equation}
+where $v_{group}$ denotes the group velocity of the wave.
 
-To obtain a convergent and aliasing free simulation one must choose small enough $\delta{}x,\; \delta{}y$ grid resolution that is smaller than the \textit{de Broglie} wavelength of the simulated system.
+Actually in equation \ref{eq:unitary_product} the $\hat{K}$ kinetic energy operator is in the exponent multiplied by $-\frac{i}{\hbar}\delta t / 2$.
+Using the knowledge gathered from equation \ref{eq:kinetic_op} we can now write
+\begin{equation}
+	\label{eq:kinetic_prop}
+	e^{-\frac{i}{\hbar}\hat{K}\delta t / 2}\Psi = \mathcal{F}^{-1}
+	\left[
+		e^{-\frac{i}{\hbar} \left(-\frac{\hbar^2}{2m}\right) \left(-k^2\right) \delta t / 2} \mathcal{F}\left[ \Psi \right]
+	\right] = 
+	\mathcal{F}^{-1}
+	\left[
+	e^{-\frac{i k^2 \hbar \delta t}{4m}} \mathcal{F}\left[ \Psi \right]
+	\right]
+\end{equation}
 
-The output of the simulation is the probability density function of the simulated volume.
-This can be obtained by calculating the square of the absolute value of the wave function for each position as seen in equation~\ref{eq:probability_density}.
+Before writing the pseudo code let's 
+Let's write the wave function as a function of discrete $i_j \in \{0, 1, \dots, N_j - 1\}$ coordinates where $j \in \{x, y, z, t\}$ and $N_j$ are the number of discrete grid points along each axis.
+
+Now $\vec{r}_x = i_x \delta x$, $\vec{r}_y = i_y \delta y$, $\vec{r}_z = i_z \delta z$ and $t = i_t \delta t$ are the original spatial and time coordinates and $\delta j$ is the resolution of the different dimensions respectively.
+With the new discretized coordinates the Schrödinger equation \ref{eq::schrodinger_general} can be written in the following form
+\begin{equation}
+	\label{eq:discretized_schrodinger}		
+	i \hbar \frac{d}{dt}\Psi(i_x, i_y, i_z, i_t) = - \frac{\hbar^2}{2m}\Delta\Psi(i_x, i_y, i_z, i_t) + V(\vec{r})\Psi(i_x, i_y, i_z, i_t)
+\end{equation}
+Having a discrete data set, \acrfull{dft} can be efficiently implemented using the \acrfull{fft} algorithm.
+The output of simulation is the probability density for each --approximately infinitesimally small-- discrete grid cell.
+This can be obtained by calculating the square of the absolute value of the wave function for each grid cell which is the same as calculating the standard scalar product between $\bra{\Psi}$ and $\ket{\Psi}$ vectors where $\bra{\Psi}$ is the transposed complex conjugate of $\ket{\Psi}$ as seen in equation~\ref{eq:probability_density}.
 \begin{equation}
 	\label{eq:probability_density}
-	p(\vec{r}; t) = |\psi(\vec{r}, t)|^2
+	p(\vec{r}, t) = |\Psi(\vec{r}, t)|^2 = \braket{\Psi(\vec{r}, t)}
 \end{equation}
+Making use of formulas \ref{eq:unitary_product}, \ref{eq:potential_prop} and \ref{eq:kinetic_prop} and plugging them into the formal solution of the Schrödinger equation we can create an algorithm for the time development of the wave function.
+We will use the $\Psi$ to represent a complex valued tensor where the elements of this tensor can be obtained by using the $i_j$ discrete indices.
+The algorithm can be written in the form of the following pseudo code
 
+\begin{algorithm}
+	\caption{Time advance algorithm}\label{alg:time_advance}
+	\begin{algorithmic}
+		\State $ \Psi \gets $ initial state of the wave function
+		\State $ V \gets $ localized potential
+		\State $ \delta t \gets $ time resolution
+		\State $ N_t \gets $ number of time steps
+		\For{$i \in [0, N_t)$}
+			\State $\Psi^{(1)} \gets FFT^{-1}
+			\left[
+			P_K\; FFT\left[ \Psi \right]
+			\right]
+			$
+			
+			\State $\Psi^{(2)} \gets P_V\; \Psi^{(1)}$
+			
+			\State $\Psi \gets FFT^{-1}
+			\left[
+			P_K\; FFT\left[ \Psi^{(2)} \right]
+			\right]
+			$
+			\State Visualize $|\Psi|^2$
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+
+Here $P_K(i_x, i_y, i_z) \sim e^{-\frac{i \hbar \delta t}{4m} \left[(2\pi i_x / N_x / \delta x)^2 + (2\pi i_y / N_y /\delta y)^2 + (2\pi i_z / N_z / \delta z)^2\right]}$ is the kinetic energy propagator in momentum space and $P_V(i_x, i_y, i_z) = e^{-\frac{i}{\hbar}V(i_x, i_y, i_z)\delta t}$ is the potential energy propagator in real space.
+We used the discretized coordinates to express the same operations as in \ref{eq:potential_prop} and \ref{eq:kinetic_prop}.
+Please note that in the kinetic propagator's case it is important to follow the convention used by the specific \acrshort{fft} implementation.
+The formula written here is not entirely correct.
+The \acrshort{fft} used in our implementation puts the amplitude associated with the largest representable frequency of $\frac{1}{2N}$ in the middle of the tensor.
+In the second half of the tensor for each axis the amplitudes are for the negative frequencies in ascending absolute value so that the largest index represents the $-\frac{1}{N}$ frequency.
+This means that we had to modify the definition of $P_K$ accordingly.
+One way to make the correction is to check whether $i_j / N_j > \frac{1}{2}$ is true. If it is than modify it like $i_j := N - i_j$.
 
