@@ -26,14 +26,6 @@
 	urldate = {2023-06-04}
 }
 
-@online{VisPy,
-	author = {© Copyright 2013-2023, VisPy developers.},
-	title = {VisPy},
-	year = 2023,
-	url = {https://vispy.org/index.html},
-	urldate = {2023-09-11}
-}
-
 @online{Matplotlib,
 	author = {© 2012 – 2023 The Matplotlib development team},
 	title = {Matplotlib: Visualization with Python},
@@ -744,4 +736,112 @@ doi = {10.4236/jmp.2019.1011091}
 	pages = {},
 	title = {Time-Domain Methods for the Maxwell Equations},
 	isbn = {91-7283-043-3},
+}
+
+@article{csebfalvi2023,
+	author = {Csébfalvi, Balázs},
+	title = {One Step Further Beyond Trilinear Interpolation and Central Differences: Triquadratic Reconstruction and its Analytic Derivatives at the Cost of One Additional Texture Fetch},
+	journal = {Computer Graphics Forum},
+	volume = {42},
+	number = {2},
+	pages = {191-200},
+	keywords = {CCS Concepts, • Computing methodologies → Volumetric models, Image processing, Texturing},
+	doi = {https://doi.org/10.1111/cgf.14753},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.14753},
+	eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14753},
+	abstract = {Abstract Recently, it has been shown that the quality of GPU-based trilinear volume resampling can be significantly improved if the six additional trilinear samples evaluated for the gradient estimation also contribute to the reconstruction of the underlying function [Csé19]. Although this improvement increases the approximation order from two to three without any extra cost, the continuity order remains C0. In this paper, we go one step further showing that a C1 continuous triquadratic B-spline reconstruction and its analytic partial derivatives can be evaluated by taking only one more trilinear sample into account. Thus, our method is the first volume-resampling technique that is nearly as fast as trilinear interpolation combined with on-the-fly central differencing, but provides a higher-quality reconstruction together with a consistent analytic gradient calculation. Furthermore, we show that our fast evaluation scheme can also be adapted to the Mitchell-Netravali [MN88] notch filter, for which a fast GPU implementation has not been known so far.},
+	year = {2023}
+}
+
+@ARTICLE{2020SciPy-NMeth,
+	author  = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and
+	Haberland, Matt and Reddy, Tyler and Cournapeau, David and
+	Burovski, Evgeni and Peterson, Pearu and Weckesser, Warren and
+	Bright, Jonathan and {van der Walt}, St{\'e}fan J. and
+	Brett, Matthew and Wilson, Joshua and Millman, K. Jarrod and
+	Mayorov, Nikolay and Nelson, Andrew R. J. and Jones, Eric and
+	Kern, Robert and Larson, Eric and Carey, C J and
+	Polat, {\.I}lhan and Feng, Yu and Moore, Eric W. and
+	{VanderPlas}, Jake and Laxalde, Denis and Perktold, Josef and
+	Cimrman, Robert and Henriksen, Ian and Quintero, E. A. and
+	Harris, Charles R. and Archibald, Anne M. and
+	Ribeiro, Ant{\^o}nio H. and Pedregosa, Fabian and
+	{van Mulbregt}, Paul and {SciPy 1.0 Contributors}},
+	title   = {{{SciPy} 1.0: Fundamental Algorithms for Scientific
+	Computing in Python}},
+	journal = {Nature Methods},
+	year    = {2020},
+	volume  = {17},
+	pages   = {261--272},
+	adsurl  = {https://rdcu.be/b08Wh},
+	doi     = {10.1038/s41592-019-0686-2},
+}
+
+@Article{harris2020array,
+	title         = {Array programming with {NumPy}},
+	author        = {Charles R. Harris and K. Jarrod Millman and St{\'{e}}fan J.
+	van der Walt and Ralf Gommers and Pauli Virtanen and David
+	Cournapeau and Eric Wieser and Julian Taylor and Sebastian
+	Berg and Nathaniel J. Smith and Robert Kern and Matti Picus
+	and Stephan Hoyer and Marten H. van Kerkwijk and Matthew
+	Brett and Allan Haldane and Jaime Fern{\'{a}}ndez del
+	R{\'{i}}o and Mark Wiebe and Pearu Peterson and Pierre
+	G{\'{e}}rard-Marchant and Kevin Sheppard and Tyler Reddy and
+	Warren Weckesser and Hameer Abbasi and Christoph Gohlke and
+	Travis E. Oliphant},
+	year          = {2020},
+	month         = sep,
+	journal       = {Nature},
+	volume        = {585},
+	number        = {7825},
+	pages         = {357--362},
+	doi           = {10.1038/s41586-020-2649-2},
+	publisher     = {Springer Science and Business Media {LLC}},
+	url           = {https://doi.org/10.1038/s41586-020-2649-2}
+}
+
+@online{vispy,
+	title = {VisPy},
+	url={https://zenodo.org/record/4321173},
+	doi= {10.5281/zenodo.592490},
+	year={2023},
+}
+
+@book{van1995python,
+	title={Python reference manual},
+	author={Van Rossum, Guido and Drake Jr, Fred L},
+	year={1995},
+	publisher={Centrum voor Wiskunde en Informatica Amsterdam}
+}
+
+@inproceedings{cuda2008,
+	author = {Nickolls, John and Buck, Ian and Garland, Michael and Skadron, Kevin},
+	title = {Scalable Parallel Programming with CUDA},
+	year = {2008},
+	isbn = {9781450378451},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/1401132.1401152},
+	doi = {10.1145/1401132.1401152},
+	abstract = {Is CUDA the parallel programming model that application developers have been waiting for?},
+	booktitle = {ACM SIGGRAPH 2008 Classes},
+	articleno = {16},
+	numpages = {14},
+	location = {Los Angeles, California},
+	series = {SIGGRAPH '08}
+}
+
+@inproceedings{cupy_learningsys2017,
+	author       = "Okuta, Ryosuke and Unno, Yuya and Nishino, Daisuke and Hido, Shohei and Loomis, Crissman",
+	title        = "CuPy: A NumPy-Compatible Library for NVIDIA GPU Calculations",
+	booktitle    = "Proceedings of Workshop on Machine Learning Systems (LearningSys) in The Thirty-first Annual Conference on Neural Information Processing Systems (NIPS)",
+	year         = "2017",
+	url          = "http://learningsys.org/nips17/assets/papers/paper_16.pdf"
+}
+
+@online{toml,
+	author={Preston-Werner, Tom},
+	title= {Tom's Obvious Minimal Language},
+	url={https://toml.io/en/},
+	urldate={2023-10-25},
 }
