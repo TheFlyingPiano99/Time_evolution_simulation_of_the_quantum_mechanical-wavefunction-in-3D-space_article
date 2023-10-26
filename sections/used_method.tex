@@ -143,3 +143,29 @@ In the second half of the tensor for each axis the amplitudes are for the negati
 This means that we had to modify the definition of $P_K$ accordingly.
 One way to make the correction is to check whether $i_j / N_j > \frac{1}{2}$ is true. If it is than modify it like $i_j := N - i_j$.
 
+When working with \acrshort{dft} it is important to take into account the boundary conditions of the transformed region.
+The \acrshort{dft} implies periodic boundary condition in which value at $i_j = 0$ connects smoothly to values at $i_j = 0$ for each of the respective $j \in \{x, y, z\}$ dimensions.
+If the data transform does not satisfy this condition unrealistic artifacts arise.
+One technique to battle this requirement is to define a high potential wall on all the edges of the simulated volume so that the wave packet bounces back and never reaches the problematic edge.
+This however limits the possible simulation cases since we can not simulate scenarios where the wave packet would leave the volume.
+The wave packet reflected by the boundary potential interferes with itself thus potentially disturbing the observation of the object of simulation.
+In our implementation we used another approach called free space boundary condition.
+This fixes the issues arising both with the periodic boundary condition and the potential box.
+We extend the simulated volume beyond the observed part and outside the visible box we create a draining potential.
+This draining potential gradually increases towards the edge of the simulated volume.
+As the name suggests it's effect on the wave packet is that it diminishes it's amplitude.
+By initializing a high enough draining potential the unrealistic artifacts on the edge of the simulated volume are practically negligible.
+In equation \ref{eq:potential_prop} we have seen that the potential propagator is a multiplication by a unit length complex number with phase proportional to $V(\vec{r})$ localized potential.
+This normally only introduces a rotation on the complex plane.
+We can however incorporate the desired draining effect by introducing complex potential.
+Let's examine what happens if a complex number has a complex phase!
+\begin{equation}
+	\label{eq:complex_phase}
+	e^{i |z|e^{i\gamma}} = e^{i|z|\left[cos(\gamma) + isin(\gamma)\right]} = e^{i|z|cos(\gamma) - |z|sin(\gamma)}
+	= e^{i|z|cos(\gamma)}e^{-|z|sin(\gamma)}
+\end{equation}
+In equation \ref{eq:complex_phase} We showed that by defining an imaginary potential we can reduce the magnitude of the wave function if we then apply the potential propagator.
+In our simulation we initialized the draining potential to be zero in the observed region and right from the corners of this box it begins to increase as a quadratic function of distance from the center of the simulated volume.
+It reaches it's maximum in the four corners of the simulated volume.
+
+

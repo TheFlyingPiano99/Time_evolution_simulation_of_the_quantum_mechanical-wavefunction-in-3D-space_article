@@ -65,7 +65,53 @@ In the configuration file there is a possibility to set whether a potential barr
 By disabling the visualization of the interaction potential we can get rid of any hardly conceptualizable elements of the resulting potential and maybe focus on a wall or a harmonic oscillator instead.
 Probability density 3D is the most self explanatory output of the system.
 Here we take the probability density as a 3D volumetric data set and visualize it using ray tracing.
-Ray tracing is the method where 
+Ray tracing is the method where we conceptually shoot rays of light from the virtual camera through the visualized volume.
+For each pixel of the image there is exactly one ray.
+We progress along the ray in discrete steps and at each step we sample the data set.
+The data read from the volume has usually a single intensity value.
+We interpret the data using a transfer function that determines the color and opacity that should be associated with the intensity.
+The color and opacity is then combined along the ray resulting in the final color and opacity value for the pixel of the image.
+The operator that recursively combines the color and opacity values is called under operator. For recursive calculation of the $A_n$ opacity in $n$th step along the ray it can be written in the form of
+\begin{equation}
+	\label{eq:under_op}
+	A_n = A_{n-1} + \alpha_n(1 - A_{n-1})
+\end{equation}
+where $A_{n-1}$ is the opacity calculated at the previous step and $\alpha_n$ is the local opacity at the $n$th step.
+A similar equation could be written for red, green and blue (RGB) color channels.
+If we would only use the colors obtained by simply stepping through the sample points the look of the probability density would be rather dull.
+We also utilize approximated gradient vectors.
+One can calculate a these vectors by taking the central difference using six additional samples around the currently sampled point.
+We take samples along each of three axes so that one of them is before and one is after the current central sample along each axis, hence the six additional samples.
+If we choose a small enough $\delta$ step size than we can successfully approximate the spatial derivatives along each axis using the following differential
+\begin{equation}
+	\label{eq:central_differential}
+	dp = \frac{p(x + \delta) - p(x - \delta)}{2\delta}
+\end{equation}
+The gradient vector points towards in the direction in which the probability density increases the fastest.
+If we make the analogy that a solid body objects has also got gradient vectors right on the edge of it's surface so that these vectors point towards the inside of the object perpendicular to the surface
+we can make the connection between gradient vectors and surface normals.
+Normal vectors of a surface are unit length vectors pointing towards the outside world from the surface and are also perpendicular to the surface.
+Normal vectors can be expressed as negated and normalized gradients.
+Normal vectors are often used in various surface shading models, since they give a good description how surfaces reflect light.
+Even tho our probability density has a much less clearly defined gradient this technique can still be used to obtain an approximated normal vector.
+If this vector is sufficiently defined (the magnitude of the gradient is not too close to zero) than we can use simple shading model such as the Blinn-Phong reflection model \cite{Blinn1977} to enhance our visuals.
+We even use the length information of the gradient to fade between the shaded and unshaded look.
+We would like to mention that in our previous works we have experimented with more physically plausible shading techniques such as applying the Cook-Torrance \acrfull{brdf} \cite{CookTorrance1982}.
+This however has not yielded good results for volumetric visualization since surface imperfections are calculated into the model thus the generally fussy nature of volumetric datasets result in an overall dark look.
+The simple Blinn-Phong model however is cheap to compute, and provides sufficiently strong specular highlights while it's still easy to parameterize.
+For most of our simulations we use a total simulated volume of $512\times 512 \times 512$ data points.
+We leave the outer half of this volume to accommodate the draining potential described in the last part of section \ref{sec:used_method}.
+In addition to the basic central difference technique we utilized Balázs Csébfalvi's reconstruction filter \cite{csebfalvi2023}.
+This method makes use of the already evaluated samples required for the central difference and at the cost of a few additional samples it performs a polynom fitting thus improves the quality of the original sample point evaluated in the center.
+
+
+
+
+
+
+
+
+
 
 
 
