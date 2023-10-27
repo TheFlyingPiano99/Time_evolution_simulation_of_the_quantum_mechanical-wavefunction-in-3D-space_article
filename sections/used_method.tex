@@ -143,6 +143,24 @@ In the second half of the tensor for each axis the amplitudes are for the negati
 This means that we had to modify the definition of $P_K$ accordingly.
 One way to make the correction is to check whether $i_j / N_j > \frac{1}{2}$ is true. If it is than modify it like $i_j := N - i_j$.
 
+In the algorithm first we have to specify an initial state for the wave function.
+Erwin Schrödinger introduced the concept of the \acrfull{wp}.
+A \acrshort{wp} is a wave front that propagates and reflects as a classical particle would do
+and also exhibits all the wave-like behavior described by \acrshort{qm}.
+It bridges the gap between classical and quantum physics.
+The term \acrfull{wpd} refer to the process of modeling \acrshort{qm} systems by initializing \acrshort{wp}s
+and observing the propagation, reflection scattering and interference of the \acrshort{wp}.
+In our work we use Gaussian \acrshort{wp}s.
+This probability density of this \acrshort{wp} has Gaussian distribution \cite{Zhang2010}, hence the name.
+The definition of such packet can be written in the following form
+\begin{equation}
+	\label{eq:gaussiaon_wp}
+	\psi(\vec{r};\; a, \vec{r_0}, \vec{k_0}) = \left( \frac{2}{\pi a^2} \right)^{\frac{D}{4}} \cdot exp\left( i\vec{k_0} \cdot \vec{r} \right) \cdot exp \left( -\frac{|\vec{r} - \vec{r_0}|^2}{a^2} \right)
+\end{equation}
+where $\vec{r_0}$ is the initial position (with the highest probability density), $\vec{k_0}$ is the initial wave vector and $D$ is the dimension, which is  $D:=3$ in our simulation.
+We can obtaion the the width of the Gaussian \acrshort{wp} as $\Delta r = \frac{a}{2}$.
+
+
 When working with \acrshort{dft} it is important to take into account the boundary conditions of the transformed region.
 The \acrshort{dft} implies periodic boundary condition in which value at $i_j = 0$ connects smoothly to values at $i_j = 0$ for each of the respective $j \in \{x, y, z\}$ dimensions.
 If the data transform does not satisfy this condition unrealistic artifacts arise.

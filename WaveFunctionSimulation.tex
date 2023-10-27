@@ -8,7 +8,7 @@
 \hypersetup{
 	colorlinks=true,
 	linkcolor=black,
-	citecolor=black,
+	citecolor=blue,
 	filecolor=magenta,      
 	urlcolor=cyan,
 	pdftitle={WaveFunctionSimulation},
@@ -19,6 +19,8 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{physics}
+\usepackage{array}
+\usepackage{subfig}
 
 
 \urlstyle{same}
@@ -55,6 +57,10 @@
 \newacronym{cuda}{CUDA}{Compute Unified Device Architecture}
 \newacronym{toml}{TOML}{Tom's Obvious Minimal Language}
 \newacronym{brdf}{BRDF}{Bidirectional Reflectance Distribution Function}
+\newacronym{wp}{WP}{Wave Packet}
+\newacronym{wpd}{WPD}{Wave Packet Dynamics}
+\newacronym{jit}{JIT}{Just In Time compilation}
+
 
 
 \begin{document}
@@ -64,9 +70,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.5\textwidth]{"figures/preview_image.jpeg"}
-		\caption{Wave packet going through double-slit.}
-		\label{fig:penetrating_potential}
+		\includegraphics[width=0.5\textwidth]{figures/optical_grid_interference_02.png}
 	\end{figure}
 	\thispagestyle{empty}
 	\pagebreak
@@ -93,6 +97,8 @@
 	\input{sections/discussion.tex}	
 
 	\input{sections/acknowledgement.tex}	
+
+	\printglossaries
 
 	\bibliography{references.bib}
 	

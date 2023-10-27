@@ -22,8 +22,13 @@ The Fourier method described in section \ref{sec:used_method} opens up the possi
 The \acrfull{cuda} toolkit is often used for parallel computational tasks implemented on the \acrshort{gpu} \cite{cuda2008}.
 It comes with a powerful \acrshort{gpu} based \acrshort{fft} implementation.
 To use \acrshort{cuda} with Python we selected the CuPy wrapping library \cite{cupy_learningsys2017} that provides abstraction over \acrshort{cuda}.
-For other purposes we use multiple other libraries such as Imageio, Matplotlib, toml, Pillow, Keyboard, Colorama, Numba, Tqdm, PyQt5, PyOpenGL.
-The sources for these libraries can be found on the internet.
+We have used Numba to access \acrfull{jit} features.
+\acrshort{jit} means that for some parts of the otherwise interpreted source code the compiler performs a runtime translation to native code.
+This code than runs efficiently on the \acrshort{cpu}.
+This feature is especially useful when iterationg over large arrays.
+We utilize \acrshort{jit} when initializing the \acrshort{wp}, localized potential and propagators.
+For other purposes we use multiple other libraries such as Imageio, Matplotlib, toml, Pillow, Keyboard, Colorama, Tqdm, PyQt5, PyOpenGL.
+The sources for these libraries can be found on the Internet.
 We have listed the required versions in a requirements.txt file in the projects GitHub repository.
 
 In its current state our application has only a console interface and it saves the resulting images and videos into files.
@@ -46,7 +51,7 @@ As we have mentioned earlier the output of the program gets saved in files.
 The program creates images and videos and text files.
 The images can be thought of as higher resolution snapshots from the videos but we also create images that are not corresponding to any of the videos.
 Currently we generate five types of different images.
-We call these canvas dwell time, canvas probability, per axis probability density, probability density 3D and finally, probability evolution.
+We call these \textit{Canvas dwell time}, \textit{Canvas probability}, \textit{Per axis probability density}, \textit{Probability density 3D} and finally, \textit{Probability evolution}.
 In each of these categories a sequence of images is being generated for each run of the simulation.
 The interval at which the state of the simulation is captured can be specified in the above described configuration file.
 Canvas dwell time is the integral of probability density over time in a specified plane intersecting the simulated volume.
@@ -80,13 +85,8 @@ where $A_{n-1}$ is the opacity calculated at the previous step and $\alpha_n$ is
 A similar equation could be written for red, green and blue (RGB) color channels.
 If we would only use the colors obtained by simply stepping through the sample points the look of the probability density would be rather dull.
 We also utilize approximated gradient vectors.
-One can calculate a these vectors by taking the central difference using six additional samples around the currently sampled point.
-We take samples along each of three axes so that one of them is before and one is after the current central sample along each axis, hence the six additional samples.
-If we choose a small enough $\delta$ step size than we can successfully approximate the spatial derivatives along each axis using the following differential
-\begin{equation}
-	\label{eq:central_differential}
-	dp = \frac{p(x + \delta) - p(x - \delta)}{2\delta}
-\end{equation}
+One can calculate these vectors by taking the central difference using six additional samples around the currently sampled point.
+(We however deployed a better method described later.)
 The gradient vector points towards in the direction in which the probability density increases the fastest.
 If we make the analogy that a solid body objects has also got gradient vectors right on the edge of it's surface so that these vectors point towards the inside of the object perpendicular to the surface
 we can make the connection between gradient vectors and surface normals.
@@ -100,15 +100,74 @@ We would like to mention that in our previous works we have experimented with mo
 This however has not yielded good results for volumetric visualization since surface imperfections are calculated into the model thus the generally fussy nature of volumetric datasets result in an overall dark look.
 The simple Blinn-Phong model however is cheap to compute, and provides sufficiently strong specular highlights while it's still easy to parameterize.
 For most of our simulations we use a total simulated volume of $512\times 512 \times 512$ data points.
-We leave the outer half of this volume to accommodate the draining potential described in the last part of section \ref{sec:used_method}.
-In addition to the basic central difference technique we utilized Balázs Csébfalvi's reconstruction filter \cite{csebfalvi2023}.
-This method makes use of the already evaluated samples required for the central difference and at the cost of a few additional samples it performs a polynom fitting thus improves the quality of the original sample point evaluated in the center.
+We leave the outer half of the total volume to accommodate the draining potential described in the last part of section \ref{sec:used_method}.
+This means that so far we only visualize $50\%$ of the stored data set: $256 \times 256 \times 256$.
+In the future we may experiment with reducing the space used up by the draining potential.
+Until than we rely heavily on good reconstruction filters to get rid of the aliasing effects visible by sampling the data set of relatively low resolution.
+We utilize Balázs Csébfalvi's reconstruction filter \cite{csebfalvi2023}.
+This method provides consistent gradient estimation that is the analytic gradient of the reconstructed function.
+It has an approximation order of three and it's also $C^1$ continuous.
+This method evaluates eight trilinear samples to calculate the intensity and the gradient for a given point.
+In current generation of \acrshort{gpu}s trilinear filtering can be efficiently evaluated using the built in sampling routines.
+The eight is only one more sample compared to the seven used in the less advanced intensity plus central difference technique and we also get better result as shown in the referred paper.
 
+The last type of the five different image outputs of our program we call \textit{Probability evolution}.
+To create this output we divided the visible region of the simulated volume to separate partitions.
+On these images we display a plot where we integrate the probability density over these regions.
+Conceptually this gives us the probability of the event of the particle being found in these spatial regions.
+It is also allowed to specify overlapping regions.
+By doing so we only get the probability of non excluding events.
+We prefer to create a measurement region for the entirety of the visible volume.
+This is very informative when the particle leaves the visible parts, hence the probability of the particle being found somewhere inside the visible part drops below one.
+Note that modeling such scenarios is made possible by using the draining potential.
 
+Besides the sequence of images our program also renders two animations in MP4 format.
+One is created from a sequence of images rendered as in the \textit{Probability density 3D} sequence.
+The other is the animated version of the \textit{Per axis probability density} sequence.
+The rate at which the state of the simulation is captured as an animation frame and the playback frame rate can be configured separately.
 
-
-
-
+We measured the performance of our application.
+We used a personal laptop to run and test the program.
+The system specification of our computer is summarized in figure \ref{fig:system_spec}.
+\begin{figure}
+	\label{fig:system_spec}
+	\begin{center}
+		\begin{tabular}{|m{5em}||m{25em}|}
+			\hline
+			CPU & AMD Ryzen 5 6600H with Radeon Graphics            3.30 GHz\\
+			\hline
+			GPU & NVIDIA GeForce RTX 3050 Ti Laptop GPU\\		
+			\hline
+			RAM & 16 GB\\		
+			\hline
+			OS & MS Windows 11 64-bit\\		
+			\hline
+		\end{tabular}
+		\caption{System specification of the used test hardware}
+	\end{center}
+\end{figure}
+First we tried a \acrshort{cpu}-only version of our simulator to compare the results with the \acrshort{gpu} accelerated implementation.
+The results of the comparison can be found in figure \ref{fig:performance_test}.
+\begin{figure}
+	\label{fig:performance_test}
+	\begin{center}
+	\begin{tabular}{|m{8em}||m{8em}| m{8em}| m{4em}|}
+		\hline
+		Input size & CPU-only Avg. [iter/s] & GPU~accelerated Avg. [iter/s] & Avg. speed up\\
+		\hline
+		$128 \times 128 \times 128$ & $1.1$ & $11.5$ & $\times 10.45$\\
+		\hline
+		$256 \times 256 \times 256$ & $0.09$ & $6.5$ & $\times 72.22$\\
+		\hline
+		$512 \times 512 \times 512$ & $0.01$ & $0.5$ & $\times 50.00$\\
+		\hline
+	\end{tabular}
+	\caption{Results of a performance test using a CPU-only and a GPU accelerated version of the application averaged}
+\end{center}
+\end{figure}
+Here we tested three different configurations with varying resolution.
+We measured the average iteration count per second.
+The test shows that by using \acrshort{gpu} acceleration we obtained significant speed up over the the \acrshort{cpu}-only implementation.
 
 
 
