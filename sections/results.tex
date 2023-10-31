@@ -64,10 +64,14 @@ The make use of all three simulated dimensions we also recreated diffraction on 
 An optical grid is a structure of multiple potential nodes arranged in a pattern.
 The holes between the potential nodes behave like the holes in the previous experiment.
 We put 11 nodes in each direction forming a rectangular grid.
-Each node has a Gaussian potential distribution and a maximal potential of $8$ hartree.
+We experimented with various lattice constants (distance between adjacent grid points).
+Here we present two simulation.
+In the first simulation each node has a Gaussian potential distribution and a maximal potential of $8$ hartree.
 The distance between adjacent grid points is $d = 4$ Bohr radii.
-The canvas distance is $L=30$ Bohr radii and the wavelength is $\lambda\simeq 2.1$ Bohr radii as in the previous simulation.
-In figure \ref{fig:optical_grid_stages} we visualized different stages of the time development using ray tracing.
+In the second simulation each node has a Gaussian potential distribution and a maximal potential of $25$ hartree.
+The distance between adjacent grid points is $d = 8$ Bohr radii.
+The canvas distance for is $L=30$ Bohr radii and the wavelength is $\lambda\simeq 2.1$ Bohr radii both simulations.
+In figure \ref{fig:optical_grid_stages} we visualized different stages of the time development of the first simulation using ray tracing.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.32\textwidth]{figures/optical_grid_01.png}
@@ -78,14 +82,23 @@ In figure \ref{fig:optical_grid_stages} we visualized different stages of the ti
 	\end{center}	
 \end{figure}
 During the simulation many interesting interference patterns arise.
-We showcase some of these in figure \ref{fig:optical_grid_interference}.
+We showcase some of these for the $4$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference} and for the $8$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference_8_grid}.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_01.png}
 		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_02.png}
 		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_03.png}
-		\caption{Three stages of interference patterns forming on the measurement canvas during optical grid simulation}
+		\caption{Three stages of interference patterns forming on the measurement canvas during optical grid simulation using lattice constant of $4$ Bohr radii}
 		\label{fig:optical_grid_interference}
+	\end{center}	
+\end{figure}
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_01_8_grid.png}
+		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_02_8_grid.png}
+		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_03_8_grid.png}
+		\caption{Three stages of interference patterns forming on the measurement canvas during optical grid simulation using lattice constant of $8$ Bohr radii}
+		\label{fig:optical_grid_interference_8_grid}
 	\end{center}	
 \end{figure}
 
