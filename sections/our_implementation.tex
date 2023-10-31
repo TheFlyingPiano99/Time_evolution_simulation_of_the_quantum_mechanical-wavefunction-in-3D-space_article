@@ -130,7 +130,6 @@ We measured the performance of our application.
 We used a personal laptop to run and test the program.
 The system specification of our computer is summarized in figure \ref{fig:system_spec}.
 \begin{figure}
-	\label{fig:system_spec}
 	\begin{center}
 		\begin{tabular}{|m{5em}||m{25em}|}
 			\hline
@@ -144,12 +143,12 @@ The system specification of our computer is summarized in figure \ref{fig:system
 			\hline
 		\end{tabular}
 		\caption{System specification of the used test hardware}
+		\label{fig:system_spec}
 	\end{center}
 \end{figure}
 First we tried a \acrshort{cpu}-only version of our simulator to compare the results with the \acrshort{gpu} accelerated implementation.
 The results of the comparison can be found in figure \ref{fig:performance_test}.
 \begin{figure}
-	\label{fig:performance_test}
 	\begin{center}
 	\begin{tabular}{|m{8em}||m{8em}| m{8em}| m{4em}|}
 		\hline
@@ -163,6 +162,7 @@ The results of the comparison can be found in figure \ref{fig:performance_test}.
 		\hline
 	\end{tabular}
 	\caption{Results of a performance test using a CPU-only and a GPU accelerated version of the application averaged}
+	\label{fig:performance_test}
 \end{center}
 \end{figure}
 Here we tested three different configurations with varying resolution.

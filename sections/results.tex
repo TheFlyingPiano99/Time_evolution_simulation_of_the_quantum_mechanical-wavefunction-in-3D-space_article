@@ -34,7 +34,8 @@ To calculate the distance between the probability density peaks first we have to
 	I(\vec{r}) = I_0 \frac{sin^2\left( \pi N \frac{dy}{\lambda L} \right)}{sin^2\left( \pi \frac{dy}{\lambda L} \right)}
 \end{equation}
 where $N$ is the number of holes on the barrier (in double-slit experiment $2$), $d$ is the distance between the holes, $L$ is the distance between the canvas and the barrier $\lambda$ is the wavelength of the wave and $y$ is the location on the canvas.
-We performed the simulation using $L = 30$, $d = 2.5$, $\lambda = \frac{2\pi}{3}\simeq 2.1$ with two slits.
+We performed the simulation using $L = 30$ Bohr radii, $d = 2.5$ Bohr radii, $\lambda = \frac{2\pi}{3}\simeq 2.1$ Bohr radii with two slits.
+The width of each slit was a small enough value of $0.5$ Bohr radii.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.32\textwidth]{figures/double_slit_01.png}
@@ -63,9 +64,9 @@ The make use of all three simulated dimensions we also recreated diffraction on 
 An optical grid is a structure of multiple potential nodes arranged in a pattern.
 The holes between the potential nodes behave like the holes in the previous experiment.
 We put 11 nodes in each direction forming a rectangular grid.
-Each node has a Gaussian potential distribution and a maximal potential of $20$ hartree.
-The distance between adjacent grid points is $d = 5$.
-The canvas distance is $L=30$ and the wavelength is $\lambda\simeq 2.1$ as previously.
+Each node has a Gaussian potential distribution and a maximal potential of $8$ hartree.
+The distance between adjacent grid points is $d = 4$ Bohr radii.
+The canvas distance is $L=30$ Bohr radii and the wavelength is $\lambda\simeq 2.1$ Bohr radii as in the previous simulation.
 In figure \ref{fig:optical_grid_stages} we visualized different stages of the time development using ray tracing.
 \begin{figure}
 	\begin{center}
@@ -83,7 +84,7 @@ We showcase some of these in figure \ref{fig:optical_grid_interference}.
 		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_01.png}
 		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_02.png}
 		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_03.png}
-		\caption{Interference patterns forming on the measurement canvas during optical grid simulation}
+		\caption{Three stages of interference patterns forming on the measurement canvas during optical grid simulation}
 		\label{fig:optical_grid_interference}
 	\end{center}	
 \end{figure}
@@ -104,9 +105,9 @@ The potential for a harmonic oscillator is given in the following form
 	V(x) = \frac{m\omega^2}{2}x^2
 \end{equation}
 where $m$ is the oscillating weight and $\omega$ is the angular velocity of the oscillation.
-First we created a scenario where particle $A$ starts from high potential thus it accelerates towards the other two particle consequently transferring the momentum to the particle on the far right.
+First we created a scenario where particle $A$ starts at $25$ Bohr radii away from to center of the oscillator where the potential energy is maximal thus it accelerates towards the other two particle consequently transferring the momentum to the particle on the far right.
 For this experiment the interaction potential consists only from the hard interaction.
-The angular velocity of the oscillator is $\omega = \frac{2\pi}{44} \simeq 0.1415$
+The angular velocity of the oscillator is $\omega = \frac{2\pi}{44} \simeq 0.1415\; \frac{rad\cdot hartree}{\hbar}$.
 After the collision particle $C$ propagates towards the maximal potential of the oscillator.
 Particle $B$ stays in place since it served only as a medium in the momentum transfer.
 The momentum gained from particle $A$ was immediately given to particle $C$.
@@ -120,9 +121,9 @@ Different phases of this simulation can be observed on the per axis visualizatio
 		\includegraphics[width=0.32\textwidth]{figures/1d_oscillator_03.png}
 		\caption{Stages of the interactions between 1D particles in harmonic oscillator: initial state, particle A giving momentum to particle C, particle C reaching maximal potential and turning back}
 		\label{fig:1d_particles_in_oscillator_stages}
-	\end{center}	
+	\end{center}
 \end{figure}
-Please note that particle $C$ converts all of it's kinetic energy to potential energy right at the half of the first period of the oscillation $t = 44 / 2 \simeq 21,48$.
+Please note that particle $C$ converts all of it's kinetic energy to potential energy right at the half of the first period of the oscillation $t = 44 / 2 \frac{\hbar}{hartree} \simeq 21,48 \frac{\hbar}{hartree}$.
 This means that the harmonic oscillator functions correctly.
 
 Now let's repeat the this experiment but now we place a finite potential barrier in the middle of the oscillator.
@@ -196,7 +197,7 @@ This shows that by by changing the electric field we can control the writing and
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/flash_keep.png}
 	\caption{Storing the electron on the floating gate over a longer period of time}
-	\label{fig:keep_memor}
+	\label{fig:flash_keep}
 \end{figure}
 
 
