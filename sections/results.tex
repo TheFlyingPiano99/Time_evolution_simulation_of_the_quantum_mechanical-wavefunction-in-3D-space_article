@@ -1,31 +1,30 @@
 \section{Results}
 \label{sec:results}
 
+\subsection{General approach and used unit system}
+
 We used our software to perform various \acrshort{wpd} simulations.
 In this section we present the results of some of these simulations.
 We will shortly introduce the simulated scenarios.
 We also want to provide some formulas to analytically validate the correctness of some of the simpler scenarios.
 Our simulator uses the Hartree atomic units \cite{hartree_1928}.
 Every quantity in the upcoming part should be interpreted as such.
-You can find animations showing the time evolution of \acrshort{wp}s on  \url{https://zoltansimon.info/src/content/research/wavepacketsim.html}.
+This unit system makes it convenient to deal with quantities at atomic scale.
+You can find animations showing the time evolution of \acrshort{wp}s simulated by our software on  \url{https://zoltansimon.info/src/content/research/wavepacketsim.html}.
 
-First we would like to present the simulation results of an electron diffraction experiment.
-Many different forms of diffraction can be explained using \acrshort{qm}.
-The scale at which diffraction happens ranges from the scale of subatomic particles  to larger molecules.
-Measuring diffraction patterns is a very useful tool in the hand of scientists.
-It provides information about the object that caused the diffraction.
-At this point it is probably important to emphasize that the diffraction of light is a different phenomenon since light is an electromagnetic wave.
-Whit that said, the fact that particles are not electromagnetic waves but still exhibit wave-like behavior as discussed is section \ref{sec:theory} makes this experiment even more interesting.
-Diffraction of a particle happens when the \acrshort{wp} of the particle passes through some kind of a barrier.
+\subsection{Double-slit experiment}
+
+First we would like to present the simulation results of an electron scattering experiment.
+Scattering of a particle happens when the \acrshort{wp} of the particle passes through some kind of a barrier with holes in it.
 In our simulation we can model the barrier as a specifically initialized localized potential.
 The \acrshort{wp} arrives from one side of the barrier.
-While passing through this barrier it diffracts and some of the \acrshort{wp} gets reflected back.
-The portion of the \acrshort{wp} that passed through --suffering diffraction-- continues forward and consequently arrives to a measuring device.
+While passing through this barrier it scatters and some of the \acrshort{wp} gets reflected back.
+The portion of the \acrshort{wp} that passed through --suffering scattering-- continues forward and consequently arrives to a measuring device\footnote{In scattering and diffraction experiments we can make the distinction between a near field and far field solution.}.
 In our simulation our measuring device is a virtual canvas where we measure the probability density.
-A simple diffraction scenario is the double-slit experiment.
+A simple scattering scenario is the double-slit experiment.
 Here the barrier is a potential wall with two narrow parallel slits.
 The \acrshort{wp} passes through these slits.
-According to the Huygens–Fresnel principle in diffraction experiments we can approximate the wave function after the barrier as concentric waves emitted from the slits or holes of the barrier.
+According to the Huygens–Fresnel principle in scattering experiments we can approximate the wave function after the barrier as concentric waves emitted from the slits or holes of the barrier.
 This gives a simple enough model to predict the shape of interference pattern forming on the canvas.
 We would like to validate the distance between the stripes in the interference pattern.
 To calculate the distance between the probability density peaks first we have to get a formula for the intensity on the canvas.
@@ -38,9 +37,9 @@ We performed the simulation using $L = 30$ Bohr radii, $d = 2.5$ Bohr radii, $\l
 The width of each slit was a small enough value of $0.5$ Bohr radii.
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.32\textwidth]{figures/double_slit_01.png}
-		\includegraphics[width=0.32\textwidth]{figures/double_slit_02.png}
-		\includegraphics[width=0.32\textwidth]{figures/double_slit_03.png}
+		\includegraphics[width=0.5\textwidth]{figures/double_slit_01.png}
+		\includegraphics[width=0.5\textwidth]{figures/double_slit_02.png}
+		\includegraphics[width=0.5\textwidth]{figures/double_slit_03.png}
 		\caption{Stages of the double-slit experiment: before, during and after passing through the double-slit}
 		\label{fig:double_slit_stages}
 	\end{center}
@@ -58,55 +57,77 @@ It can be seen that that the two patterns are very similar.
 	\end{center}
 \end{figure}
 
+\subsection{Diffraction by optical grating-like potential}
 
-Note that in equation \ref{eq:Huygens} $y$ is a one dimensional coordinate. Indeed the double-slit experiment can be fully described using only two spatial dimensions and the diffraction pattern forms in a single dimension perpendicular to the propagation direction of the wave.
-The make use of all three simulated dimensions we also recreated diffraction on optical grid.
-An optical grid is a structure of multiple potential nodes arranged in a pattern.
-The holes between the potential nodes behave like the holes in the previous experiment.
+Many different forms of diffraction can be explained using \acrshort{qm}.
+The scale at which diffraction happens ranges from the scale of subatomic particles  to larger molecules.
+Measuring diffraction patterns is a very useful tool in the hand of scientists.
+It provides information about the object that caused the diffraction.
+At this point it is probably important to emphasize that the diffraction of light is a different phenomenon from the diffraction of matter waves since light is an electromagnetic wave.
+With that said, the fact that particles are not electromagnetic waves but still exhibit wave-like behavior as discussed is section \ref{sec:theory} makes this experiment even more interesting.
+Note that in equation \ref{eq:Huygens} the $y$ is a one dimensional coordinate. Indeed the double-slit experiment can be fully described using only two spatial dimensions and the diffraction pattern forms in a single dimension perpendicular to the propagation direction of the wave.
+This is because the localized potential in this scenario is independent of the $z$ coordinate.
+The make use of all three simulated dimensions we also modeled diffraction on diffraction grating.
+In optics, a diffraction grating is a periodic 2D structure that diffracts light \cite{Stroke1967}.
+In \acrshort{qm} such gratings can also be utilized to diffract wave packets.
+The holes between the potential nodes behave like the holes in the double-slit experiment.
 We put 11 nodes in each direction forming a rectangular grid.
 We experimented with various lattice constants (distance between adjacent grid points).
-Here we present two simulation.
-In the first simulation each node has a Gaussian potential distribution and a maximal potential of $8$ hartree.
+Here we present two simulations.
+In the first simulation each node has a Gaussian potential distribution and a maximal potential of $V_{max} = 8$ hartree.
 The distance between adjacent grid points is $d = 4$ Bohr radii.
-In the second simulation each node has a Gaussian potential distribution and a maximal potential of $25$ hartree.
+In the second simulation each node has a Gaussian potential distribution and a maximal potential of $V_{max} = 25$ hartree.
 The distance between adjacent grid points is $d = 8$ Bohr radii.
-The canvas distance for is $L=30$ Bohr radii and the wavelength is $\lambda\simeq 2.1$ Bohr radii both simulations.
-In figure \ref{fig:optical_grid_stages} we visualized different stages of the time development of the first simulation using ray tracing.
+The canvas distance is $L=30$ Bohr radii and the wavelength of the \acrshort{wp} is $\lambda\simeq 2.1$ Bohr radii for both simulations.
+Note in both cases the kinetic energy of the \acrshort{wp} $E = \frac{p^2}{2m} = \frac{h^2}{2\lambda^2} \simeq 4.5$ hartree is less than $V_{max}$.
+Otherwise the grating wouldn't impact sufficiently the propagation of the \acrshort{wp}.
+In figure \ref{fig:optical_grid_stages} we visualized different stages of the time development of the first simulation and \ref{fig:optical_grid_stages_8_bohr_radii} showcases stages of the second simulation.
+Both sequences of rendered images make use of the ray tracing visualization method.
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_01.png}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_02.png}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_03.png}
-		\caption{Stages of the optical grid experiment: during, right after and later after passing through the grid}
+		\includegraphics[width=0.5\textwidth]{figures/optical_grid_01.png}
+		\includegraphics[width=0.5\textwidth]{figures/optical_grid_02.png}
+		\includegraphics[width=0.5\textwidth]{figures/optical_grid_03.png}
+		\caption{Stages of the optical grid experiment using a grid with lattice constants of $4$ Bohr radii: during, right after and later after passing through the grid}
 		\label{fig:optical_grid_stages}
 	\end{center}	
 \end{figure}
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{figures/optical_grid_8_bohr_rad_01.png}
+		\includegraphics[width=0.5\textwidth]{figures/optical_grid_8_bohr_rad_02.png}
+		\includegraphics[width=0.5\textwidth]{figures/optical_grid_8_bohr_rad_03.png}
+		\caption{Stages of the optical grid experiment using a grid with lattice constants of $8$ Bohr radii: during, right after and later after passing through the grid}
+		\label{fig:optical_grid_stages_8_bohr_radii}
+	\end{center}	
+\end{figure}
+
 During the simulation many interesting interference patterns arise.
 We showcase some of these for the $4$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference} and for the $8$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference_8_grid}.
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_01.png}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_02.png}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_03.png}
-		\caption{Three stages of interference patterns forming on the measurement canvas during optical grid simulation using lattice constant of $4$ Bohr radii}
+		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_01.png}
+		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_02.png}
+		\caption{Two stages of interference patterns forming on the measurement canvas during optical grid simulation using lattice constant of $4$ Bohr radii}
 		\label{fig:optical_grid_interference}
 	\end{center}	
 \end{figure}
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_01_8_grid.png}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_02_8_grid.png}
-		\includegraphics[width=0.32\textwidth]{figures/optical_grid_interference_03_8_grid.png}
-		\caption{Three stages of interference patterns forming on the measurement canvas during optical grid simulation using lattice constant of $8$ Bohr radii}
+		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_01_8_grid.png}
+		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_02_8_grid.png}
+		\caption{Two stages of interference patterns forming on the measurement canvas during optical grid simulation using lattice constant of $8$ Bohr radii}
 		\label{fig:optical_grid_interference_8_grid}
 	\end{center}	
 \end{figure}
+
+\subsection{Simulating 1D particles in 3D configuration space}
 
 One interesting use case of a higher dimensional \acrshort{wpd} simulator is that the higher dimensional space can be used to model the interactions between multiple lower dimensional particles.
 For example our 3D simulation is capable of the simulation of three 1D particles.
 To do this we have to define special interaction potential.
 To create such potential we have to think about the coordinates in the higher dimensional configuration space as the coordinates of the lower dimensional space describing the location of the lower dimensional particle.
-If the potential potential energy affecting all particles can be expressed as a $V(x_a, x_b, x_c)$ function of the location of particle $A$ and $B$ and $C$ than we can reinterpret this function as the $V(\vec{r})$ localized potential function used in the potential propagator in equation \ref{eq:potential_prop}.
+If the potential energy affecting all particles can be expressed as a $V(x_a, x_b, x_c)$ function of the location of particle $A$ and $B$ and $C$ than we can reinterpret this function as the $V(\vec{r})$ localized potential function used in the potential propagator in equation \ref{eq:potential_prop}.
 Note that here $\vec{r}$ becomes $(x_a, x_b, x_c)$.
 To model the interaction between the three 1D particles we initialized a linear combination of two types of interaction potentials.
 One is proportional to $\frac{1}{|x_i - x_j|}$ where $i,j\in\{a,b,c\}$ and $i\neq j$ and the other is a hard interaction that takes it's maximum if the particles approach each other inside an $\epsilon$ radius otherwise it's zero.
@@ -136,7 +157,7 @@ Different phases of this simulation can be observed on the per axis visualizatio
 		\label{fig:1d_particles_in_oscillator_stages}
 	\end{center}
 \end{figure}
-Please note that particle $C$ converts all of it's kinetic energy to potential energy right at the half of the first period of the oscillation $t = 44 / 2 \frac{\hbar}{hartree} \simeq 21,48 \frac{\hbar}{hartree}$.
+Please note that particle $C$ converts all of it's kinetic energy to potential energy right at the half of the first period of the oscillation $t = 44 / 2 \frac{\hbar}{hartree} \simeq 22 \frac{\hbar}{hartree}$.
 This means that the harmonic oscillator functions correctly.
 
 Now let's repeat the this experiment but now we place a finite potential barrier in the middle of the oscillator.
@@ -162,6 +183,8 @@ This can be observed in figure \ref{fig:1d_osc_with_tunneling}.
 		\label{fig:1d_osc_with_tunneling}
 	\end{center}	
 \end{figure}
+
+\subsection{Modeling a flash memory cell}
 
 Our last group of simulations try to model the working of a flash memory cell.
 The flash memory is used extensively in many modern electronic devices such as smart phones, laptops or tablets.
@@ -191,16 +214,22 @@ In our first flash memory related simulation we have initialized a wall that rep
 Our simulation deals with only one electron.
 This initialize the location of this electron to be inside the floating gate.
 When we want to simulate the flushing of the cell, we add a Coulomb potential the decreases towards the barrier.
-Create initialized the barrier to have a height of $V_0 = 10$ hartree and width of $d = 1.0$ Bohr radius.
-From the other sides we fully enclosed the floating gate with thicker potential barriers the so that the electron can only tunnel through the desired barrier.
-We gave an initial momentum to our \acrshort{wp} towards the barrier.
-We initialized the Coulomb potential to have take it's maximal value on the control gate and so that it gives a 50.
+Create initialized the barrier to have a height of $V_0 = 10$ hartree and width of $d = 4.0$ Bohr radius.
+We surrounded the floating gate area with thick potential barriers from the remaining five directions to prevent tunneling in these directions but excluded these from the visualization to make the electron's probability density visible from outside.
+Coulomb potential induced by a negatively charged point charge $Q$ acting on an electron can be written like
+\begin{equation}
+	\label{eq:coulomb_potential}
+	V_E = \frac{1}{4\pi \epsilon_0}\frac{Q}{r}
+\end{equation}
+To make the simulation more stable we approximated this potential with a linear gradient decreasing as we move farther from the control gate.
+This way we were able to precisely configure the gradient necessary for Fowler–Nordheim tunneling without creating extremely high potential near the control gate.
+We initialized this gradient potential to be zero at the control gate and descrease to negative values with a constant slope of $\frac{dV}{dx}=-1\frac{\text{hartree}}{\text{Bohr radius}}$.
 We run the simulation with the Coulomb potential turned on and off and compared the probability evolution plots.
 Figure \ref{fig:flash_flush_plot} shows the flushing of the floating gate with the Coulomb potential enabled.
 The probability of the electron being found on the gate is rapidly decreasing.
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{figures/flash_flush.png}
+	\includegraphics[width=0.6\textwidth]{figures/flash_flush.png}
 	\caption{Flushing of the floating gate}
 	\label{fig:flash_flush_plot}
 \end{figure}
@@ -208,7 +237,7 @@ In figure \ref{fig:flash_keep} however the the electron stays much longer on the
 This shows that by by changing the electric field we can control the writing and flushing of the floating gate.
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{figures/flash_keep.png}
+	\includegraphics[width=0.6\textwidth]{figures/flash_keep.png}
 	\caption{Storing the electron on the floating gate over a longer period of time}
 	\label{fig:flash_keep}
 \end{figure}

@@ -1,11 +1,15 @@
 \section{Our implementation}
 \label{sec:our_implementation}
 
+\subsection{Short summary of the functionality of our simulator}
+
 Using the Fourier method we created a Python application simulating the time development of the quantum mechanical wave function.
 We use ray tracing to visualize resulting volumetric of probability density.
 The visualization requires the sampling of 3D data set on a discretized grid.
 This makes it impossible to fully reconstruct the wave function that we simulated using only a finite resolution to begin with.
 In order to fight sampling artifacts we deploy a state of the art triquadratic reconstruction filter recently proposed by Balázs Csébfalvi \cite{csebfalvi2023}.
+
+\subsection{Technologies in use}
 
 We choose Python \cite{van1995python} as our programming language because there is a waste amount of helpful tools implemented to use with it that specifically aim towards leveraging the difficulty of writing mathematical and physics related simulation.
 The majority of these tools are written in a hardware friendly languages such as Fortran, C or C++.
@@ -18,18 +22,23 @@ For 3D visualization we choose to use VisPy \cite{vispy}.
 This library provides a nice basic set of features to handle virtual camera and create scenes but also enables us to go deeper and write our own \acrshort{gpu} shader code.
 We made use of this to modify the default volume visualization code to fit our needs.
 
+\subsection{GPU parallelization and Just In Time compilation}
+
 The Fourier method described in section \ref{sec:used_method} opens up the possibility to implement the simulation on the \acrshort{gpu}.
+Using \acrshort{gpu} acceleration is one of our contributions that to the already existing implementation used by Géza István Márk and Péter Vancsó.
 The \acrfull{cuda} toolkit is often used for parallel computational tasks implemented on the \acrshort{gpu} \cite{cuda2008}.
 It comes with a powerful \acrshort{gpu} based \acrshort{fft} implementation.
 To use \acrshort{cuda} with Python we selected the CuPy wrapping library \cite{cupy_learningsys2017} that provides abstraction over \acrshort{cuda}.
 We have used Numba to access \acrfull{jit} features.
 \acrshort{jit} means that for some parts of the otherwise interpreted source code the compiler performs a runtime translation to native code.
 This code than runs efficiently on the \acrshort{cpu}.
-This feature is especially useful when iterationg over large arrays.
+This feature is especially useful when iterating over large arrays.
 We utilize \acrshort{jit} when initializing the \acrshort{wp}, localized potential and propagators.
 For other purposes we use multiple other libraries such as Imageio, Matplotlib, toml, Pillow, Keyboard, Colorama, Tqdm, PyQt5, PyOpenGL.
 The sources for these libraries can be found on the Internet.
 We have listed the required versions in a requirements.txt file in the projects GitHub repository.
+
+\subsection{About the program's user interface}
 
 In its current state our application has only a console interface and it saves the resulting images and videos into files.
 The reason that we so far haven't prioritized the development of a graphical user interface is that we think that terminal interfaces can still have their benefits even in 2023.
@@ -47,30 +56,55 @@ The flexibility and universality of this data-format made it an overall good cho
 We can use a single \acrshort{toml} file to set the resolution and dimensions of the simulated volume, specify the parameters of the wave packet, add an arbitrary number of various potential barriers.
 I this file we have parameters to configure the 3D visualization and others.
 
+\subsection{Generated output}
+
 As we have mentioned earlier the output of the program gets saved in files.
 The program creates images and videos and text files.
 The images can be thought of as higher resolution snapshots from the videos but we also create images that are not corresponding to any of the videos.
 Currently we generate five types of different images.
-We call these \textit{Canvas dwell time}, \textit{Canvas probability}, \textit{Per axis probability density}, \textit{Probability density 3D} and finally, \textit{Probability evolution}.
+We call these \textit{Canvas probability}, \textit{Canvas dwell time}, \textit{Per axis probability density}, \textit{Probability density 3D} and finally, \textit{Probability evolution}.
 In each of these categories a sequence of images is being generated for each run of the simulation.
 The interval at which the state of the simulation is captured can be specified in the above described configuration file.
-Canvas dwell time is the integral of probability density over time in a specified plane intersecting the simulated volume.
-Canvas probability is the probability density in a specified plane intersecting the volume.
-Both dwell time and probability density can be used to visualize interference patterns after a wave packet passes through some kind of a potential barrier such as a double-slit or an optical grid.
-Per axis probability density gives a projected view on the probability density.
-This not a real image but rather a plot of probability density as the function of spatial coordinates separately for each axis.
-To obtain this plot we integrated the probability density so that for a specific $i_j = x$ discretized spatial coordinate we sum the probability density where $i_j = x$ and the other two coordinates run across their domain.
-We also overlap the plot of the potential barriers on the same graph.
-This helps to understand the changes in propagation of the wave packet.
+\textit{Canvas probability} is the $\rho(\vec{r}, t)$ probability density in a specified plane intersecting the volume.
+$\tau (\vec{r})$ \textit{canvas dwell time} is the integral of the $\rho(\vec{r}, t)$ probability density over $t$ elapsed time in a specified plane intersecting the simulated volume.
+This can be formalized as
+\begin{equation}
+	\tau (\vec{r}, t) = \int_0^t \rho(\vec{r}, \delta)\; d\delta
+	\label{eq:dwell_time}
+\end{equation}
+For now the measurement plane used in the above described methods has to be perpendicular to one of the three main axes to simplify the calculation.
+Both \textit{dwell time} and \textit{probability density} can be used to visualize interference patterns after a wave packet passes through some kind of a potential barrier such as a double-slit or an optical grid as we will show in Section \ref{sec:results}.
+\textit{Per axis probability density} gives a plot of integrated probability densities for each axis.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{figures/per_axis_plot_explained.pdf}
+	\caption{Calculation method of the \textit{Per axis probability density} for a given $x$ coordinate}
+	\label{fig:per_axis_explained}
+\end{figure}
+To obtain the plot of $\rho_X(x, t)$ per axis probability density we integrate the $\rho(\vec{r}, t)$ where $r_x = x$ and the other two coordinates run across their domain.
+Equation \ref{eq:per_axis_calculation} gives the formula for calculating this measurable for the $X$ axis.
+\begin{equation}
+	\rho_X(x, t) = \int_Y \int_Z \rho(\vec{r}, t)\; dy dz
+	\label{eq:per_axis_calculation}
+\end{equation}
+Figure \ref{fig:per_axis_explained} attempts to provide further intuition.
+We also overlap the plot of the potential barriers on the same graph to understand the changes in propagation of the wave packet caused by the localized potential.
 This type of plot can provide useful information for most of the simulation cases, but it is especially useful when we want to simulate the behavior of three one dimensional particles in a three dimensional configuration space.
-In this case the projected probability density along each axis represent the wave packet of a different 1D particle.
-It is possible to initialize a potential that model the collision between these three particles.
+In this case the projected probability density along each axis represents the wave packet of a different 1D particle.
+It is possible to initialize a potential that models the collision between these three particles.
 This creates the effect that the particles interact.
 In the configuration file there is a possibility to set whether a potential barrier should appear in the visualization.
 By disabling the visualization of the interaction potential we can get rid of any hardly conceptualizable elements of the resulting potential and maybe focus on a wall or a harmonic oscillator instead.
 Probability density 3D is the most self explanatory output of the system.
 Here we take the probability density as a 3D volumetric data set and visualize it using ray tracing.
 Ray tracing is the method where we conceptually shoot rays of light from the virtual camera through the visualized volume.
+Figure \ref{fig:ray_tracing_method} explains the concept of ray tracing.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{figures/ray_tracing_visualization.pdf}
+	\caption{Visual explanation of the ray tracing method: we sample the 3D data set along rays shot from the virtual camera}
+	\label{fig:ray_tracing_method}
+\end{figure}
 For each pixel of the image there is exactly one ray.
 We progress along the ray in discrete steps and at each step we sample the data set.
 The data read from the volume has usually a single intensity value.
@@ -113,7 +147,11 @@ The eight is only one more sample compared to the seven used in the less advance
 
 The last type of the five different image outputs of our program we call \textit{Probability evolution}.
 To create this output we divided the visible region of the simulated volume to separate partitions.
-On these images we display a plot where we integrate the probability density over these regions.
+On these images of this type we display a plot where we integrate the probability density over these regions following equation \ref{eq:probability_evolution}.
+\begin{equation}
+	\probP(t)=\int_\mathcal{V}\rho(\vec{r},t)d^3r
+	\label{eq:probability_evolution}
+\end{equation}
 Conceptually this gives us the probability of the event of the particle being found in these spatial regions.
 It is also allowed to specify overlapping regions.
 By doing so we only get the probability of non excluding events.
@@ -125,6 +163,8 @@ Besides the sequence of images our program also renders two animations in MP4 fo
 One is created from a sequence of images rendered as in the \textit{Probability density 3D} sequence.
 The other is the animated version of the \textit{Per axis probability density} sequence.
 The rate at which the state of the simulation is captured as an animation frame and the playback frame rate can be configured separately.
+
+\subsection{Performance test}
 
 We measured the performance of our application.
 We used a personal laptop to run and test the program.

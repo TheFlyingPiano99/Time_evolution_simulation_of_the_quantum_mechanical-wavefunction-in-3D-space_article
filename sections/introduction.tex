@@ -1,7 +1,7 @@
 \section{Introduction}
 
-In the first quarter of 20th century \acrfull{qm} opened a whole new window to understand our universe. Tamás Geszti in his book \cite{geszti2007} writes: learning \acrshort{qm} is part of the process of understanding the world, and the person who masters it, understands the world better.
-It is a common view that while Albert Einstein's \acrfull{gr} provides a model that accurately describes the laws of nature governing large scale phenomena \cite{wald2010general}, quantum theory excels at atomic scale.
+In the first quarter of 20th century \acrfull{qm} opened a whole new window to understand our universe. Tamás Geszti in his book \cite{geszti2007} writes: \textit{"learning \acrshort{qm} is part of the process of understanding the world, and the person who masters it, understands the world better"}.
+It is a common view that while Albert Einstein's \acrfull{gr} provides a model that accurately describes the laws of nature governing large scale phenomena \cite{wald2010general}, quantum theory excels at atomic scale\footnote{Under extreme circumstances such as in black holes macroscopic quantum phenomena are also present}.
 Although humanity has not yet accepted a single theory that would be capable of modeling both the small and large thus bridging the gap between \acrshort{qm} and \acrshort{gr}, there are many use-cases, where technology heavily depends on both theories.
 \acrshort{qm} can be used efficiently to model the behavior of atomic particles.
 It describes how electrons behave in the orbitals around atomic core and give an explanation for chemical reactions.
@@ -9,15 +9,16 @@ It can be used to model the structure of molecules.
 \acrshort{qm} made possible for humanity the make use of the nuclear energy in power plants thus creating a new and efficient source of power.
 Computers --as we know them today-- wouldn't be possible without a deep understanding of various quantum phenomena.
 These systems make use of transistors \cite{Ross1998} which can also be thought of as a product of \acrshort{qm}.
+
 In nanotechnology it is crucial to make quantum mechanical calculations to predict --and in many cases explain-- the behavior of different nanostructures.
 One interesting field of study is the science of single-layer materials \cite{Zhuang2014}. These are also known as 2D materials.
-One such carbon structure is called graphene \cite{VANCSO2013101, Márk2016}.
+One such carbon structure is called graphene \cite{Geim2009, Stoller2008, B815239J}.
 This single-layered structure conducts heat and electricity very efficiently thus raises high hopes in many when it comes to possible use-cases.
 Nowadays quantum information science is getting larger and larger audience \cite{imresandor2004}.
 Quantum Computing promises newer before seen increase in computation capabilities due to the massively parallel nature of quantum systems leveraging quantum superposition. Quantum Communication on the other hand opens new possibilities when it comes to secure information exchange with efficient channel encoding.
-Although both of the last two fields mentioned await technological evolution in order to be commercially deployable due to a large amount of technical challenges, they both show that \acrshort{qm} has a lot of real life applications and the spectrum of these will only become more colorful as technology evolves.
+Although both of the last two fields mentioned await technological evolution in order to be deployable at scale due to a large amount of technical challenges, they both show that \acrshort{qm} has a lot of real life applications and the spectrum of these will only become more colorful as technology evolves.
 
-Inspired by the previously enumerated large amount of various fields of application we targeted the goal to recreate the behavior of quantum systems in a computer simulation.
+Inspired by the previously enumerated large amount of various fields of application we set the goal to study the behavior of quantum systems by computer simulation.
 Such simulations are very useful for scientists. They use such methods to accurately model interaction between particles and various potential fields.
 In order to accomplish this goal we choose a method that uses the \acrfull{fft} to efficiently calculate the time development of the quantum mechanical wave function.
 In \acrshort{qm}, the wave function describes the state of a physical system. In the non-relativistic case, the time evolution of the wave function is described by the time-dependent Schrödinger equation \cite{schrodinger1926}.
@@ -25,7 +26,7 @@ In 1982, D Kosloff and R Kosloff proposed a method \cite{KOSLOFF198335} to solve
 In 2020, Géza István Márk published a paper \cite{mark2020webschrodinger} describing a computer program for the interactive solution of the time-dependent and stationary two-dimensional (2D) Schrödinger equation.
 Some details of quantum phenomena are only observable by calculating with all three spatial dimensions.
 We found it worth stepping out from the two-dimensional plane and investigating these phenomena in three dimensions.
-Not that Géza István Márk and his colleagues have not already used 3D calculations in their research work.
+Géza István Márk and his colleagues have already used 3D calculations in their research work \cite{VANCSO2013101, Mark2016}.
 The difference is that their implementation uses solely the \acrfull{cpu} of a computer.
 For visualization of the resulting probability density so far they used isosurface method.
 Our contribution mainly lays in leveraging the parallelisation potential of the modern \acrfull{gpu} thus significantly boosting the speed of the calculation by approximately a factor of 50 on our test hardware.
@@ -33,14 +34,12 @@ We also apply state of the art volumetric visualization techniques to create ple
 We believe that by combining the knowledge available for computer visualization specialists and physicists we can arrive to something greater than the possibilities available if each of us would be working only in his or her own domain of expertise.
 We write our implementation with future extendibility in mind, since we would like to continue our work and develop a capable simulation platform that can be deployed as a tool for state of the art scientific research.
 
-In section \ref{sec:theory} of this article we start by discussing the theoretical background.
-Then in section \ref{sec:used_method} we proceed to describe the used Fourier method to simulate the wave function.
-In section \ref{sec:our_implementation} we provide an overview of the implementation details of our program.
-After this in section \ref{sec:results} we showcase our simulation results.
-Here we compare analytically describable simulation cases to the mathematical model.
-At the end in section \ref{sec:discussion} we summarize our results in a short discussion.
-
-
+In Section \ref{sec:theory} of this work we start by discussing the theoretical background.
+Then in Section \ref{sec:used_method} we proceed to describe the used Fourier method to simulate the time development of the wave function.
+In Section \ref{sec:our_implementation} we provide an overview of the implementation details of our program.
+After this in Section \ref{sec:results} we showcase our simulation results.
+Here we compare the result of simple, analytically describable simulation scenarios to the mathematical model.
+At the end in Section \ref{sec:discussion} we summarize our results in a short discussion.
 
 
 
