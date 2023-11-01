@@ -32,9 +32,9 @@ To calculate the distance between the probability density peaks first we have to
 	\label{eq:Huygens}
 	I(\vec{r}) = I_0 \frac{sin^2\left( \pi N \frac{dy}{\lambda L} \right)}{sin^2\left( \pi \frac{dy}{\lambda L} \right)}
 \end{equation}
-where $N$ is the number of holes on the barrier (in double-slit experiment $2$), $d$ is the distance between the holes, $L$ is the distance between the canvas and the barrier $\lambda$ is the wavelength of the wave and $y$ is the location on the canvas.
-We performed the simulation using $L = 30$ Bohr radii, $d = 2.5$ Bohr radii, $\lambda = \frac{2\pi}{3}\simeq 2.1$ Bohr radii with two slits.
-The width of each slit was a small enough value of $0.5$ Bohr radii.
+where $N$ is the number of holes on the barrier (in double-slit experiment $2$), $d$ is the distance between the center of the holes, $L$ is the distance between the canvas and the barrier $\lambda$ is the wavelength of the wave and $y$ is the location on the canvas.
+We performed the simulation using $L = 30$ Bohr radii, $d = 4.0$ Bohr radii, $\lambda = \frac{2\pi}{3}\simeq 2.1$ Bohr radii with two slits.
+The width of each slit was a small enough value of $1.0$ Bohr radii.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{figures/double_slit_01.png}
@@ -48,10 +48,11 @@ Different stages of double-slit simulation can be seen in figure \ref{fig:double
 The interference pattern is visualized in figure \ref{fig:double_slit_interference} on a canvas of size $60 \times 60$ Bohr radius.
 We compared the simulated pattern and the pattern predicted by the Huygens–Fresnel principle.
 It can be seen that that the two patterns are very similar.
+The animation of this simulation can be accessed on \url{https://www.youtube.com/watch?v=16M21MPFea0}.
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{figures/double_slit_interference.png}
-		\includegraphics[width=0.5\textwidth]{figures/validation_of_double_slit.png}
+		\includegraphics[width=0.6\textwidth]{figures/double_slit_interference.png}
+		\includegraphics[width=0.6\textwidth]{figures/validation_of_double_slit.png}
 		\caption{Comparison of the simulated (above) and the analytically predicted (below) interference pattern during double-slit experiment}
 		\label{fig:double_slit_interference}
 	\end{center}
@@ -104,6 +105,7 @@ Both sequences of rendered images make use of the ray tracing visualization meth
 
 During the simulation many interesting interference patterns arise.
 We showcase some of these for the $4$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference} and for the $8$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference_8_grid}.
+The animations showing the results in motion can be found on \url{https://youtu.be/KCE5xqm-diQ?si=-kzjWvaw8zOcAz4C} and \url{https://youtu.be/YCadOpsx9y8}.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_01.png}
@@ -132,36 +134,39 @@ Note that here $\vec{r}$ becomes $(x_a, x_b, x_c)$.
 To model the interaction between the three 1D particles we initialized a linear combination of two types of interaction potentials.
 One is proportional to $\frac{1}{|x_i - x_j|}$ where $i,j\in\{a,b,c\}$ and $i\neq j$ and the other is a hard interaction that takes it's maximum if the particles approach each other inside an $\epsilon$ radius otherwise it's zero.
 To prevent blotting of the Gaussian \acrshort{wp} we also initialized a harmonic oscillator potential.
-This helps because the Gaussian $wp$ is the eigenstate of the harmonic oscillator.
+This helps because the Gaussian \acrshort{wp} is the eigenstate of the harmonic oscillator.
 The potential for a harmonic oscillator is given in the following form
 \begin{equation}
 	\label{eq:harmonic_osc}
 	V(x) = \frac{m\omega^2}{2}x^2
 \end{equation}
-where $m$ is the oscillating weight and $\omega$ is the angular velocity of the oscillation.
-First we created a scenario where particle $A$ starts at $25$ Bohr radii away from to center of the oscillator where the potential energy is maximal thus it accelerates towards the other two particle consequently transferring the momentum to the particle on the far right.
+where $m$ is the oscillating mass and $\omega$ is the angular frequency of the oscillation.
+Our first simulation of 1D particles is somewhat similar to the classical Newton's cradle \cite{}
+in the sense that it demonstrates momentum transfer between multiple particles.
+We created a scenario where particle $A$ starts at $25$ Bohr radii away from to center of the oscillator where the potential energy is maximal thus it accelerates towards the other two particle ($B$ and $C$) consequently transferring the momentum to particle $C$ on the far right.
 For this experiment the interaction potential consists only from the hard interaction.
-The angular velocity of the oscillator is $\omega = \frac{2\pi}{44} \simeq 0.1415\; \frac{rad\cdot hartree}{\hbar}$.
-After the collision particle $C$ propagates towards the maximal potential of the oscillator.
+The angular frequency of the oscillator was selected to be $\omega = \frac{2\pi}{40} \simeq 0.1571\; \frac{rad\cdot hartree}{\hbar}$.
+After the momentum transfer particle $C$ propagates towards the maximal potential of the oscillator on the far right.
 Particle $B$ stays in place since it served only as a medium in the momentum transfer.
 The momentum gained from particle $A$ was immediately given to particle $C$.
-When all of it's kinetic energy is transferred to potential energy than it turns back.
+When all the kinetic energy of the moving particle is transferred to potential energy than it turns back.
 The oscillation with the momentum transfer between the particles continues.
 Different phases of this simulation can be observed on the per axis visualization in figure \ref{fig:1d_particles_in_oscillator_stages}.
+The corresponding animation can be found on \url{https://youtu.be/zOiYACVOssU}.
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.32\textwidth]{figures/1d_oscillator_01.png}
-		\includegraphics[width=0.32\textwidth]{figures/1d_oscillator_02.png}
-		\includegraphics[width=0.32\textwidth]{figures/1d_oscillator_03.png}
+		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_01.png}
+		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_02.png}
+		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_03.png}
 		\caption{Stages of the interactions between 1D particles in harmonic oscillator: initial state, particle A giving momentum to particle C, particle C reaching maximal potential and turning back}
 		\label{fig:1d_particles_in_oscillator_stages}
 	\end{center}
 \end{figure}
-Please note that particle $C$ converts all of it's kinetic energy to potential energy right at the half of the first period of the oscillation $t = 44 / 2 \frac{\hbar}{hartree} \simeq 22 \frac{\hbar}{hartree}$.
+Please note that particle $C$ converts all of it's kinetic energy to potential energy right at the half of the first period of the oscillation $t = 40 / 2 \frac{\hbar}{hartree} = 20 \frac{\hbar}{hartree}$.
 This means that the harmonic oscillator functions correctly.
 
 Now let's repeat the this experiment but now we place a finite potential barrier in the middle of the oscillator.
-The probability of a particle with $E$ energy tunneling through a $d$ thick barrier of $V_0$ potential can be expressed in the following form
+In Tamás Geszti's book \cite{geszti2007} we can find that the probability of a particle with $E$ energy tunneling through a $d$ thick barrier of $V_0$ potential can be expressed in the following form
 \begin{equation}
 	\label{eq:tunelling probability}
 	\probP_{tunnel} = \frac{1}{1 + \frac{V_0^2}{4E(V_0 - E)}sinh^2(\kappa d)}
@@ -169,17 +174,26 @@ The probability of a particle with $E$ energy tunneling through a $d$ thick barr
 where $\kappa = \sqrt{2m(V_0 - E)}\;/\hbar$ is determined by the energy of the incoming \acrshort{wp}.
 Energy is conserved so $E = V(x_A)$.
 We solve for $\probP_{tunnel} = \frac{1}{2}$.
-One possible solution is $V_0 \simeq 8.5$ hartree and $d \simeq 0.3$ Bohr radius.
+One possible solution is $V_0 \simeq 9.8$ hartree and $d \simeq 0.3$ Bohr radius.
 Particle $A$ gives it's momentum to $B$ as before.
 With these parameters approximately the half of the probability density of particle $B$ tunnels through the barrier giving it's momentum to particle $B$ on the next side of the wall.
 This causes the $C$ to start moving with probability of approximately $\frac{1}{2}$.
-This can be observed in figure \ref{fig:1d_osc_with_tunneling}.
+What we just described is called the entanglement of the states of particles $A$, $B$ and $C$.
+Let's perform a measurement to determine the location of particles $A$, $B$ and $C$ shortly after the first momentum transfer could have happened.
+If we would measure particle $A$ to be located in the middle of the harmonic oscillator that means that it gave it's momentum to particle $B$ and $B$ have tunneled through the finite potential barrier.
+If $B$ tunneled that also means that beyond the barrier it collided with particle $C$ consequently transferring all it's kinetic energy to $C$.
+On the contrary if the result of the measurement determining the location of particle $A$ would have shown that particle $A$ bounced back from $B$ that means that $B$ did not tunnel through the barrier.
+This also means that particle $C$ did not receive any kinetic energy and stayed stationary right beyond the barrier.
+The measurement of the state of one entangled particle determines the outcome of the measurement of the other entangled particles.
+Real life experiments are sound with this thought experiment \cite{Vasilyev2017}.
+The probability density plot can be observed in figure \ref{fig:1d_osc_with_tunneling}.
+The animation of this simulation can be found on \url{https://youtu.be/IVb_mpzmuYA}.
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.32\textwidth]{figures/1d_oscillator_tunneling_01.png}
-		\includegraphics[width=0.32\textwidth]{figures/1d_oscillator_tunneling_02.png}
-		\includegraphics[width=0.32\textwidth]{figures/1d_oscillator_tunneling_03.png}
-		\caption{Stages of the interactions between 1D particles in harmonic oscillator: initial state, particle A giving momentum to particle C, particle C reaching maximal potential and turning back}
+		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_tunneling_01.png}
+		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_tunneling_02.png}
+		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_tunneling_03.png}
+		\caption{Stages of the interactions between 1D particles in harmonic oscillator with finite potential barrier: initial state, particle A giving momentum to particle C with approximately 0.5 probability, particle C reaching maximal potential and turning back with approximately 0.5 probability}
 		\label{fig:1d_osc_with_tunneling}
 	\end{center}	
 \end{figure}
@@ -208,8 +222,8 @@ This barrier must be thick enough to prevent unwanted tunneling when the control
 After the control gate fills with electrons the Coulomb potential created by those electrons makes an overall slope in the potential.
 This slope adds to the potential wall thus changing its shape.
 The previously rectangular barrier now acquired a triangular outline. More importantly the $d$ length of the barrier gets reduced.
-This increases the probability of the electron in floating gate to tunnel out from the gate. This is sound with equation \ref{eq:tunelling probability} for the probability of tunneling.
-This is phenomena is called Fowler–Nordheim tunneling \cite{Fowler_1928bv}.
+This increases the probability of the electron in floating gate to tunnel out from the gate. The probability of tunneling can be described by equation \ref{eq:tunelling probability}.
+This phenomenon is called Fowler–Nordheim tunneling \cite{Fowler_1928bv}.
 In our first flash memory related simulation we have initialized a wall that represents the barrier between the floating gate and the substrate.
 Our simulation deals with only one electron.
 This initialize the location of this electron to be inside the floating gate.
