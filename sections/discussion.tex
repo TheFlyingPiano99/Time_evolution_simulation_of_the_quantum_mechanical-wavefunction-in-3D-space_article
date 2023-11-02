@@ -1,30 +1,31 @@
 \section{Discussion}
 \label{sec:discussion}
 
-In our work we wrote about simulating the time development of the quantum mechanical wave function in 3D space.
+In our work, we wrote about simulating the time development of the quantum mechanical wave function in 3D space.
 Our accomplishments are the following
 \begin{itemize}
-	\item We adopted a simulation method that uses the Fourier transform as a subroutine to efficiently calculate the solution of the time dependent Schrödinger equation.
-	\item As an improvement over Géza István Márk's implementation we ported the Fast Fourier Transform to the Graphical Programming Unit thus reaching a major speed up of a factor of 50 for some cases.
+	\item We adopted a simulation method that uses the Fourier transform as a subroutine to efficiently calculate the solution of the time-dependent Schrödinger equation.
+	\item As an improvement over Géza István Márk's implementation, we ported the Fast Fourier Transform to the Graphical Programming Unit, thus reaching a major speed-up of a factor of 50 for some cases.
 	\item We implemented the draining potential technique to allow longer simulation scenarios without the forming of unrealistic reflections and interference patterns.
-	\item We combined state of the art volume visualization techniques to enhance the visual quality of the resulting probability density images.
-	\item We used multiple alternatives to visualize the probability densities including \textit{canvas probability density} good for visualizing diffraction the \textit{per axis} approach that is handy when we do configuration space simulations or the \textit{probability evolution} used in the flash memory simulation.
-	\item We used our simulator software to run various Wave Packet Dynamical simulations ranging from basic diffraction scenarios, through simulation of lower dimensional particles in configuration space up to a more advanced case of simulating the writing and flushing sequence of a flash memory cell. For some of these scenarios we provided analytical validation methods such as the one for the interference pattern of the double-slit experiment or the easily testable periodic time of the harmonic oscillator or even the probability of the wave packet tunneling through barriers.
+	\item We combined state-of-the-art volume visualization techniques to enhance the visual quality of the resulting probability density images.
+	\item We used multiple alternatives to visualize the probability densities, including \textit{canvas probability density}, good for visualizing diffraction, the \textit{per axis} approach that is handy when we do configuration space simulations or the \textit{probability evolution} used in the flash memory simulation.
+	\item We used our simulator software to run various Wave Packet Dynamical simulations ranging from basic diffraction scenarios through simulation of lower dimensional particles in configuration space up to a more advanced case of simulating the writing and flushing sequence of a flash memory cell. For some of these scenarios, we provided analytical validation methods such as the one for the interference pattern of the double-slit experiment, the easily testable periodic time of the harmonic oscillator, or even the probability of the wave packet tunneling through barriers.
 \end{itemize}
 We see our work as a successful entry into the world of quantum mechanical wave packet dynamics and a definitely good starting point for further research.
 We believe that the vast amount of application of quantum mechanics speaks for itself when the question is whether this research is important or not.
 Another motivation to do wave packet dynamical simulations is the Nobel prize winning research of Dr. Ferenc Krausz. Attosecond physics opens a new frontier in understanding our universe.
 Doing computer simulations and comparing the results with laboratory experiments can be a powerful strategy to make new discoveries.
-We already have multiple ideas how to improve and append the current method.
-One obvious direction for development is to improve the user interface and to create a graphical interface besides the current terminal based interface.
-In the future we want to make possible to calculate the eigenstates of the localized potential.
-This would require to calculate the Fourier transform in time domain to obtain the energy state of the system.
-Then iteratively converge towards the eigenstate.
+We already have multiple ideas on how to improve and append the current method.
+One obvious direction for development is to improve the user interface and to create a graphical interface besides the current terminal-based interface.
+In the future, we want to make it possible to calculate the eigenstates of the localized potential.
+This would require the calculation of the Fourier transform in the time domain to obtain the energy state of the system.
+Then, iteratively converge towards the eigenstate.
 There is also a possibility to incorporate electromagnetism into the Hamiltonian operator.
-Making this work would be also a very interesting project.
-From visualization point of view there are also many possibilities to improve.
-As we have seen in this work there is room for even better reconstruction filters
-and clever ways to make use of the limited resolution.
+We have simulation 1D particles in
+Making this work would also be a very exciting project.
+From a visualization point of view, there are also many possibilities to improve.
+As seen in this work, there is room for even better reconstruction filters
+and clever ways to use the limited resolution.
 We are very hopeful about the future research potential of this topic and are very eager to continue the fruitful work.
 
 
