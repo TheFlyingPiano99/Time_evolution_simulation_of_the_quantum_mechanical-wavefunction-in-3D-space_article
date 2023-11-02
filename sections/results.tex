@@ -59,6 +59,7 @@ The animation of this simulation can be accessed on \url{https://www.youtube.com
 	\end{center}
 \end{figure}
 
+\FloatBarrier
 \subsection{Diffraction by optical grating-like potential}
 
 Many different forms of diffraction can be explained using \acrshort{qm}.
@@ -85,7 +86,7 @@ Note in both cases the kinetic energy of the \acrshort{wp} $E = \frac{p^2}{2m} =
 Otherwise, the grating would not impact the propagation of the \acrshort{wp} sufficiently.
 In figure \ref{fig:optical_grid_stages}, we visualized different stages of the time development of the first simulation, and \ref{fig:optical_grid_stages_8_bohr_radii} showcases stages of the second simulation.
 Both sequences of rendered images make use of the ray tracing visualization method.
-\begin{figure}[hbt!]
+\begin{figure}[hbtp!]
 	\begin{center}
 		\includegraphics[width=0.45\textwidth]{figures/optical_grid_01.png}
 		\includegraphics[width=0.45\textwidth]{figures/optical_grid_02.png}
@@ -94,7 +95,7 @@ Both sequences of rendered images make use of the ray tracing visualization meth
 		\label{fig:optical_grid_stages}
 	\end{center}	
 \end{figure}
-\begin{figure}[hbt!]
+\begin{figure}[hbtp!]
 	\begin{center}
 		\includegraphics[width=0.45\textwidth]{figures/optical_grid_8_bohr_rad_01.png}
 		\includegraphics[width=0.45\textwidth]{figures/optical_grid_8_bohr_rad_02.png}
@@ -107,23 +108,24 @@ Both sequences of rendered images make use of the ray tracing visualization meth
 During the simulation, many interesting interference patterns arise.
 We showcase some of these for the $4$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference} and for the $8$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference_8_grid}.
 The animations showing the results in motion can be found on \url{https://youtu.be/KCE5xqm-diQ?si=-kzjWvaw8zOcAz4C} and \url{https://youtu.be/YCadOpsx9y8}.
-\begin{figure}[hbt!]
+\begin{figure}[hbtp!]
 	\begin{center}
-		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_01.png}
-		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_02.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_interference_01.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_interference_02.png}
 		\caption{Two stages of interference patterns forming on the measurement canvas during diffraction grating simulation using lattice constant of $4$ Bohr radii}
 		\label{fig:optical_grid_interference}
 	\end{center}	
 \end{figure}
-\begin{figure}[hbt!]
+\begin{figure}[hbtp!]
 	\begin{center}
-		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_01_8_grid.png}
-		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_02_8_grid.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_interference_01_8_grid.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_interference_02_8_grid.png}
 		\caption{Two stages of interference patterns forming on the measurement canvas during diffraction grating simulation using lattice constant of $8$ Bohr radii}
 		\label{fig:optical_grid_interference_8_grid}
 	\end{center}	
 \end{figure}
 
+\FloatBarrier
 \subsection{Many-body interactions}
 
 One interesting use case of a higher dimensional \acrshort{wpd} simulator is that the higher dimensional space can be used to model the interactions between multiple lower-dimensional particles.
@@ -189,7 +191,7 @@ The measurement of the state of one entangled particle determines the outcome of
 Real-life experiments are sound with this thought experiment \cite{Vasilyev2017}.
 The probability density plot can be observed in figure \ref{fig:1d_osc_with_tunneling}.
 The animation of this simulation can be found on \url{https://youtu.be/IVb_mpzmuYA}.
-\begin{figure}[hbt!]
+\begin{figure}[hbtp!]
 	\begin{center}
 		\includegraphics[width=0.45\textwidth]{figures/1d_oscillator_tunneling_01.png}
 		\includegraphics[width=0.45\textwidth]{figures/1d_oscillator_tunneling_02.png}
@@ -199,6 +201,7 @@ The animation of this simulation can be found on \url{https://youtu.be/IVb_mpzmu
 	\end{center}	
 \end{figure}
 
+\FloatBarrier
 \subsection{Modeling a flash memory cell}
 
 Our last group of simulations tries to model the working of a flash memory cell.
@@ -221,7 +224,7 @@ This is used to store bits of information.
 In our model, we simulate one single cell, and this cell only stores a single bit of information.
 We only model one single electron that can be trapped on the floating gate.
 The writing and flushing of the flash cell are performed by applying voltage on the control gate, inducing a strong enough electric field that the electron can tunnel through the potential barrier between the floating gate and the channel.
-\begin{figure}[hbt!]
+\begin{figure}[hbtp!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/flash_memory.pdf}
 	\caption{Schematic structure of a flash memory cell}
@@ -238,7 +241,7 @@ This phenomenon is called Fowler–Nordheim tunneling \cite{Fowler_1928bv}.
 Figure \ref{fig:fowler_nordheim_tunneling} visualizes the principle of this effect.
 \begin{figure}[hbt!]
 	\centering
-	\includegraphics[width=0.5\textwidth]{figures/fowler_nordheim_tunneling.pdf}
+	\includegraphics[width=0.4\textwidth]{figures/fowler_nordheim_tunneling.pdf}
 	\caption{Fowler-Nordheim tunneling: on the upper image there is no Coulomb potential; on the image below Coulomb potential changes the shape of potential barrier causing tunneling}
 	\label{fig:fowler_nordheim_tunneling}
 \end{figure}
@@ -277,14 +280,14 @@ Bear in mind that we are working with atomic units.
 Figure \ref{fig:flash_flush_plot} shows that after $40\;\frac{\hbar}{\text{hartree}} \simeq 0.96 \text{femtoseconds}$ the probability of the particle located on the gate decreased by $10\%$.
 \begin{figure}[hbt!]
 	\centering
-	\includegraphics[width=0.5\textwidth]{figures/flash_flush.png}
+	\includegraphics[width=0.4\textwidth]{figures/flash_flush.png}
 	\caption{Flushing of the floating gate: the probability of the particle being found on the floating gate is gradually decreasing}
 	\label{fig:flash_flush_plot}
 \end{figure}
 In figure \ref{fig:flash_keep}, however, the electron stays on the gate since we disabled the Coulomb potential.
 \begin{figure}[hbt!]
 	\centering
-	\includegraphics[width=0.5\textwidth]{figures/flash_keep.png}
+	\includegraphics[width=0.4\textwidth]{figures/flash_keep.png}
 	\caption{Storing the electron on the floating gate: there is no Fowler-Nordheim tunneling}
 	\label{fig:flash_keep}
 \end{figure}
@@ -293,14 +296,15 @@ This can be observed in figure \ref{fig:flash_memory_ray_traced} and in animated
 In these images, we only visualize the potential barrier between the control gate and floating gate (top green layer), the single electron trapped inside the floating gate (with red), and the potential barrier between the floating gate and substrate (lower green layer).
 The simulation also incorporates the remaining walls around the floating gate and the Coulomb potential.
 
-\begin{figure}[hbt!]
+\begin{figure}[hbtp!]
 	\begin{center}
-		\includegraphics[width=0.45\textwidth]{figures/flash_memory_01.png}
-		\includegraphics[width=0.45\textwidth]{figures/flash_memory_02.png}
-		\includegraphics[width=0.45\textwidth]{figures/flash_memory_03.png}
+		\includegraphics[width=0.4\textwidth]{figures/flash_memory_01.png}
+		\includegraphics[width=0.4\textwidth]{figures/flash_memory_02.png}
+		\includegraphics[width=0.4\textwidth]{figures/flash_memory_03.png}
 		\caption{Flushing a trapped electron from the floating gate of a flash memory cell: initial state; first tunneling; after multiple bounces inside the gate}
 		\label{fig:flash_memory_ray_traced}
 	\end{center}
 \end{figure}
 
 
+\FloatBarrier
