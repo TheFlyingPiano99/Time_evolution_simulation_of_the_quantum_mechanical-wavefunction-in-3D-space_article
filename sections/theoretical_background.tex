@@ -84,18 +84,18 @@ Erwin Schrödinger introduced the concept of the \acrfull{wp} to show that in li
 This particle-like propagation of a \acrshort{wp} of the wave is due to the superposition of waves with different frequencies forming peaks.
 These waves extinguish each other for the most part, but at some position and time coordinates, the amplitudes add up to larger amplitude.
 An example of this is demonstrated in figure \ref{fig:superposition}.
-\begin{figure}
+\begin{figure}[hbt!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/Superposition of cosine waves.png}
 	\caption{Superposition of cosine waves with different wavelength: the superposition forms a peak at the $x = 0$ coordinate}
 	\label{fig:superposition}
 \end{figure}
 
-$\Psi_k$ denotes the complex amplitude of a matter wave with $k=\frac{2\pi}{\lambda}$ wave number. The formula of a plain wave propagating in positive $x$ direction can be described in the form of equation \ref{eq:plain_wave_k}.
+$\Psi_k$ denotes the complex amplitude of a matter wave with $k=\frac{2\pi}{\lambda}$ wave number. The formula of a plane wave propagating in positive $x$ direction can be described in the form of equation \ref{eq:plane_wave_k}.
 
 \begin{equation}
-	\label{eq:plain_wave_k}
-	\Psi_k(x, t) = e^i(kx - \omega t)
+	\label{eq:plane_wave_k}
+	\Psi_k(x, t) = e^{i(kx - \omega t)}
 \end{equation}
 
 Let's calculate the superposition of waves with different wave numbers! We assume that the angular velocity $omega(k)$ depends on the $k$ wave number and that the waves with different wave numbers have various $c(k)$ weights in the linear combination. This gives the following Fourier integral:

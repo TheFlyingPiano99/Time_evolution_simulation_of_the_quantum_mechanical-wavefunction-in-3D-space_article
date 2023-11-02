@@ -8,8 +8,8 @@ There are multiple available algorithms for this task.
 A widely used category of solving strategies are the \acrfull{fdtd} methods.
 This approach is also widely adopted to simulate the solution of Maxwell equations \cite{maxwell1865, Ulf2001}.
 \acrfull{fdtdq} however exhibit numerical instability \cite{Soriano2004}.
-After a longer sequence of simulation steps, the solutions diverge from the ground truth.
-There are various alterations to the base method.
+After a longer sequence of simulation steps, the solutions diverge.
+There are various alterations to the basic method.
 One such method was proposed by Min Zhu et al. \cite{Zhu2014} in the year 2014.
 Their algorithm is called the \acrfull{rkhofdtd}.
 In 2021, a follow-up paper \cite{Zhu_Wang_2021} demonstrated the superiority of \acrshort{rkhofdtd} over the basic \acrshort{fdtdq} approach.
@@ -24,7 +24,7 @@ The time development step of the algorithm has a time complexity of $\mathcal{O}
 The amount of \acrshort{fft} runs and multiplications can be reduced further if we do not want to read the results of the time development in each step.
 A significant speed-up can be reached by using a parallelized implementation of the \acrshort{fft} algorithm as we did by using an efficient \acrshort{gpu} implementation.
 
-\subsection{Detailed explanation of the used Fourier method}
+\subsection{Detailed explanation of the split-time Fourier method}
 
 In the following part, we would like to explain the \acrshort{fft} method in detail.
 Let us start by deriving the formal solution of the \ref{eq::schrodinger_general} differential equation.
@@ -40,7 +40,7 @@ Let us start by deriving the formal solution of the \ref{eq::schrodinger_general
 where $\Psi(\vec{r}, t_0)$ is a specified initial state and $\Psi(\vec{r}, t)$ is the state after some $\delta t = t - t_0$ time.
 The problematic part is the Hamiltonian operator in the exponent.
 The kinetic and potential operators can not be commuted in general. Hence, exponential can not be factored.
-Géza István Márk, in his Web-Schrödinger simulator \cite{mark2020webschrodinger} decomposes the exponential by the symmetrical unitary product as shown in the form \ref{eq:unitary_product}.
+We can decomposes the exponential by the symmetrical unitary product \cite{Fleck1976, FEIT1982412} as shown in the form \ref{eq:unitary_product}.
 \begin{equation}
 	\label{eq:unitary_product}
 	e^{-\frac{i}{\hbar}\hat{H}\delta t} = e^{-\frac{i}{\hbar}(\hat{K} + \hat{V})\delta t} \approx e^{-\frac{i}{\hbar}\hat{K}\delta t / 2}\; e^{-\frac{i}{\hbar}\hat{V}\delta t}\; e^{-\frac{i}{\hbar}\hat{K}\delta t / 2}
@@ -214,5 +214,14 @@ Let us examine what happens if a complex number has a complex phase!
 In equation \ref{eq:complex_phase}, we showed that by defining an imaginary potential, we can reduce the magnitude of the wave function if we then apply the potential propagator.
 In our simulation, we initialized the draining potential to be zero in the observed region, and right from the corners of this box, it begins to increase as a quadratic function of distance from the center of the simulated volume.
 It reaches its maximum in the four corners of the simulated volume.
-
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{figures/REGIONS.png}
+	\caption{Calculation scheme used for the simulation of a \acrfull{stm} investigation of a carbon nanotube [hivatkozás az
+		1998-as PRB cikkre]. The upper black ellipse is the STM tip, the middle
+		black ring is the cross-section of the nanotube, and the lower black
+		region is the support electrode. The red concentric circles show the
+		imaginary potential with increasing magnitude.}
+	\label{fig:draining_potential}
+\end{figure}
 

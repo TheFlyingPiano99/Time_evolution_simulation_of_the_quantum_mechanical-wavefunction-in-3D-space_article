@@ -21,8 +21,12 @@ In the future, we want to make it possible to calculate the eigenstates of the l
 This would require the calculation of the Fourier transform in the time domain to obtain the energy state of the system.
 Then, iteratively converge towards the eigenstate.
 There is also a possibility to incorporate electromagnetism into the Hamiltonian operator.
-We have simulation 1D particles in
 Making this work would also be a very exciting project.
+We have simulated 1D particles in configuration space.
+To expand on this idea, we could use higher dimensional simulations to model the interaction between multiple multidimensional particles.
+To simulate two 2D particles, a 4D configuration space would be required.
+Similarly, to simulate two 3D particles, a 6D configuration space is needed.
+If we would like to simulate such higher dimensional spaces, more tricks are necessary since the data sets would be too large to fit into the \acrshort{gpu}'s memory.
 From a visualization point of view, there are also many possibilities to improve.
 As seen in this work, there is room for even better reconstruction filters
 and clever ways to use the limited resolution.

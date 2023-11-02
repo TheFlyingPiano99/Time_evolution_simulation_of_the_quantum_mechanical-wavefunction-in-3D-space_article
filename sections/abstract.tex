@@ -1,12 +1,30 @@
 \section*{Abstract}
-
-In quantum mechanics, the wave function describes the state of a physical system. In the non-relativistic case, the time evolution of the wave function is described by the time-dependent Schrö\-din\-ger equation. In 1982, D Kosloff and R Kosloff proposed a method \cite{KOSLOFF198335} to solve the time-dependent Schrödinger equation efficiently using Fourier transformation. In 2020, Géza István Márk published a paper \cite{mark2020webschrodinger} describing a computer program for the interactive solution of the time-dependent and stationary two-dimensional (2D) Schrödinger equation. Some details of quantum phenomena are only observable by calculating with all three spatial dimensions. We found it worth stepping out from the two-dimensional plane and investigating these phenomena in three dimensions. We implemented the above method for the three-dimensional case to simulate the time evolution of the wave function. We used our implementation to simulate typical quantum phenomena using wave packet dynamics. First, we tried the method on analytically describable cases, such as the simulation of the double-slit experiment, then we investigated the operation of flash memory. We used raytraced volumetric visualization to render the resulting probability density. In our work, we introduce the basics of wave packet dynamics in quantum mechanics. We describe the used method in detail and showcase our simulation results.\\
-For further information and animations please visite\\ \url{https://zoltansimon.info/src/content/research/wavepacketsim.html}
-
-\selectlanguage{magyar}
-\section*{Kivonat}
-
-A kvantummechanikában a hullámfüggvény írja le egy fizikai rendszer állapotát. Nemrelativisztikus esetben a hullámfüggvény időbeli fejlődését az időfüggő Schrödinger-egyenlet határozza meg. 1982-ben D Kosloff és R Kosloff közölt egy módszert \cite{KOSLOFF198335} az időfüggő Schrödinger-egyenlet hatékony megoldására Fourier-transzformáció felhasználásával. 2020-ban Márk Géza István cikkében \cite{mark2020webschrodinger} bemutatott egy interaktív szá\-mí\-tó\-gé\-pes programot az időfüggő és a stacionárius kétdimenziós Schrödinger-egyenlet megoldására. A kvantumos jelenségek bizonyos részletei csak mindhárom térdimenzióval számolva figyelhetők meg. Érdemesnek tartottuk a síkból kilépve, térben is megvizsgálni ezeket a jelenségeket. Munkánkban háromdimenziós esetre implementáltuk az említett módszert, hogy szimuláljuk a hullámfüggvény időbeli fejlődését. Hullámcsomag-dinamikát használva kipróbáltuk több jellegzetes kvantumos jelenség szimulációját. A módszert először analitikusan kezelhető esetekre teszteltük, például a kétréses kísérlet szimulációjára, ezután megvizsgáltuk a flash memória cella működését. A szimuláció kimeneteként előálló valószínűségi sűrűséget sugárkövetéses térfogati megjelenítéssel ábrázoltuk. Dolgozatunkban ismertetjük a kvantummechanikai hullámcsomag-dinamika alapjait. Részletesen leírjuk a használt eljárást, és bemutatjuk a szimulációnk eredményeit.\\
-További információ és animációk találhatóak a\\ \url{https://zoltansimon.info/src/content/research/wavepacketsim.html} webcímen.
-
 \selectlanguage{english}
+
+In quantum mechanics, the wave function describes the state of a physical system. In the non-relativistic case, the time evolution of the wave function is described by the time-dependent Schrö\-din\-ger equation. In 1982, D Kosloff and R Kosloff proposed a method \cite{KOSLOFF198335} to solve the time-dependent Schrödinger equation efficiently using Fourier transformation.
+%Injected part:
+The computational physics research group, led by Géza I. Márk in the
+Nanotechnology Departement, Institute for Technical Physics and
+Materials Science, Centre for Energy Research, in collaboration with
+Belgian researchers developed a simulation method based on
+three-dimensional wave packet dynamics for the study of the electron
+dynamics in nanosystems. A simplified, interactive two-dimensional
+version for educational purposes was published in 2020 \cite{mark2020webschrodinger}. In this
+work, we demonstrate two improvements of the wave packed dynamical
+simulation software: (i) the use of \acrfull{gpu},
+which results in a vast (up to 50x) increase in simulation speed, and (ii)
+the introduction of advanced visualization techniques \cite{raytracing_weekend, csebfalvi2023} which
+are important to correctly interpret huge 4D space-time wave function
+data sets obtained from the simulation.
+%End of injected part
+%In 2020, Géza István Márk published a paper \cite{mark2020webschrodinger} describing a computer program for the interactive solution of the time-dependent and stationary two-dimensional (2D) Schrödinger equation. Some details of quantum phenomena are only observable by calculating with all three spatial dimensions. We found it worth stepping out from the two-dimensional plane and investigating these phenomena in three dimensions. We implemented the above method for the three-dimensional case to simulate the time evolution of the wave function.
+We used our implementation to simulate typical quantum phenomena using wave packet dynamics. First, we tried the method on analytically describable cases, such as the simulation of the double-slit experiment, and then we investigated the operation of flash memory. We used raytraced volumetric visualization to render the resulting probability density. In our work, we introduce the basics of wave packet dynamics in quantum mechanics. We describe the used method in detail and showcase our simulation results.\\
+For further information and animations, please visite\\ \url{https://zoltansimon.info/src/content/research/wavepacketsim.html}
+
+%\selectlanguage{magyar}
+%\section*{Kivonat}
+%
+%A kvantummechanikában a hullámfüggvény írja le egy fizikai rendszer állapotát. Nemrelativisztikus esetben a hullámfüggvény időbeli fejlődését az időfüggő Schrödinger-egyenlet határozza meg. 1982-ben D Kosloff és R Kosloff közölt egy módszert \cite{KOSLOFF198335} az időfüggő Schrödinger-egyenlet hatékony megoldására Fourier-transzformáció felhasználásával. 2020-ban Márk Géza István cikkében \cite{mark2020webschrodinger} bemutatott egy interaktív szá\-mí\-tó\-gé\-pes programot az időfüggő és a stacionárius kétdimenziós Schrödinger-egyenlet megoldására. A kvantumos jelenségek bizonyos részletei csak mindhárom térdimenzióval számolva figyelhetők meg. Érdemesnek tartottuk a síkból kilépve, térben is megvizsgálni ezeket a jelenségeket. Munkánkban háromdimenziós esetre implementáltuk az említett módszert, hogy szimuláljuk a hullámfüggvény időbeli fejlődését. Hullámcsomag-dinamikát használva kipróbáltuk több jellegzetes kvantumos jelenség szimulációját. A módszert először analitikusan kezelhető esetekre teszteltük, például a kétréses kísérlet szimulációjára, ezután megvizsgáltuk a flash memória cella működését. A szimuláció kimeneteként előálló valószínűségi sűrűséget sugárkövetéses térfogati megjelenítéssel ábrázoltuk. Dolgozatunkban ismertetjük a kvantummechanikai hullámcsomag-dinamika alapjait. Részletesen leírjuk a használt eljárást, és bemutatjuk a szimulációnk eredményeit.\\
+%További információ és animációk találhatóak a\\ \url{https://zoltansimon.info/src/content/research/wavepacketsim.html} webcímen.
+%
+%\selectlanguage{english}

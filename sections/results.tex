@@ -1,7 +1,7 @@
 \section{Results}
 \label{sec:results}
 
-\subsection{General approach and used unit system}
+\subsection{General approach and the system of units}
 
 We used our software to perform various \acrshort{wpd} simulations.
 In this section, we present the results of some of these simulations.
@@ -11,12 +11,13 @@ Our simulator uses the Hartree atomic units \cite{hartree_1928}.
 Every quantity in the upcoming part should be interpreted as such.
 This unit system makes it convenient to deal with quantities at atomic scale.
 You can find animations showing the time evolution of \acrshort{wp}s simulated by our software on  \url{https://zoltansimon.info/src/content/research/wavepacketsim.html}.
+From this web page, you can also navigate to the GitHub repository of our project, where all our source code is available for download.
 
 \subsection{Double-slit experiment}
 
 First, we would like to present the simulation results of an electron scattering experiment.
 Scattering of a particle happens when the \acrshort{wp} of the particle passes through some kind of a barrier with holes in it.
-In our simulation, we can model the barrier as a specifically initialized localized potential.
+In our simulation, we can model the barrier as a localized potential.
 The \acrshort{wp} arrives from one side of the barrier.
 While passing through this barrier, it scatters, and some of the \acrshort{wp} gets reflected back.
 The portion of the \acrshort{wp} that passed through --suffering scattering-- continues forward and consequently arrives at a measuring device\footnote{In scattering and diffraction experiments we can make the distinction between a near field and far field solution.}.
@@ -35,11 +36,11 @@ To calculate the distance between the probability density peaks, first, we have 
 where $N$ is the number of holes on the barrier (in double-slit experiment $2$), $d$ is the distance between the center of the holes, $L$ is the distance between the canvas and the barrier $\lambda$ is the wavelength of the wave and $y$ is the location on the canvas.
 We performed the simulation using $L = 30$ Bohr radii, $d = 4.0$ Bohr radii, $\lambda = \frac{2\pi}{3}\simeq 2.1$ Bohr radii with two slits.
 The width of each slit was a small enough value of $1.0$ Bohr radii.
-\begin{figure}
+\begin{figure}[hbt!]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{figures/double_slit_01.png}
-		\includegraphics[width=0.5\textwidth]{figures/double_slit_02.png}
-		\includegraphics[width=0.5\textwidth]{figures/double_slit_03.png}
+		\includegraphics[width=0.45\textwidth]{figures/double_slit_01.png}
+		\includegraphics[width=0.45\textwidth]{figures/double_slit_02.png}
+		\includegraphics[width=0.45\textwidth]{figures/double_slit_03.png}
 		\caption{Stages of the double-slit experiment: before, during, and after passing through the double-slit}
 		\label{fig:double_slit_stages}
 	\end{center}
@@ -49,7 +50,7 @@ The interference pattern is visualized in figure \ref{fig:double_slit_interferen
 We compared the simulated pattern and the pattern predicted by the Huygens–Fresnel principle.
 It can be seen that the two patterns are very similar.
 The animation of this simulation can be accessed on \url{https://www.youtube.com/watch?v=16M21MPFea0}.
-\begin{figure}
+\begin{figure}[hbt!]
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{figures/double_slit_interference.png}
 		\includegraphics[width=0.6\textwidth]{figures/validation_of_double_slit.png}
@@ -84,20 +85,20 @@ Note in both cases the kinetic energy of the \acrshort{wp} $E = \frac{p^2}{2m} =
 Otherwise, the grating would not impact the propagation of the \acrshort{wp} sufficiently.
 In figure \ref{fig:optical_grid_stages}, we visualized different stages of the time development of the first simulation, and \ref{fig:optical_grid_stages_8_bohr_radii} showcases stages of the second simulation.
 Both sequences of rendered images make use of the ray tracing visualization method.
-\begin{figure}
+\begin{figure}[hbt!]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{figures/optical_grid_01.png}
-		\includegraphics[width=0.5\textwidth]{figures/optical_grid_02.png}
-		\includegraphics[width=0.5\textwidth]{figures/optical_grid_03.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_01.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_02.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_03.png}
 		\caption{Stages of the diffraction grating experiment using a grating with lattice constants of $4$ Bohr radii: during, right after, and later after passing through the grating}
 		\label{fig:optical_grid_stages}
 	\end{center}	
 \end{figure}
-\begin{figure}
+\begin{figure}[hbt!]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{figures/optical_grid_8_bohr_rad_01.png}
-		\includegraphics[width=0.5\textwidth]{figures/optical_grid_8_bohr_rad_02.png}
-		\includegraphics[width=0.5\textwidth]{figures/optical_grid_8_bohr_rad_03.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_8_bohr_rad_01.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_8_bohr_rad_02.png}
+		\includegraphics[width=0.45\textwidth]{figures/optical_grid_8_bohr_rad_03.png}
 		\caption{Stages of the diffraction grating experiment using a grating with lattice constants of $8$ Bohr radii: during, right after, and later after passing through the grating}
 		\label{fig:optical_grid_stages_8_bohr_radii}
 	\end{center}	
@@ -106,7 +107,7 @@ Both sequences of rendered images make use of the ray tracing visualization meth
 During the simulation, many interesting interference patterns arise.
 We showcase some of these for the $4$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference} and for the $8$ Bohr radius lattice constant case in figure \ref{fig:optical_grid_interference_8_grid}.
 The animations showing the results in motion can be found on \url{https://youtu.be/KCE5xqm-diQ?si=-kzjWvaw8zOcAz4C} and \url{https://youtu.be/YCadOpsx9y8}.
-\begin{figure}
+\begin{figure}[hbt!]
 	\begin{center}
 		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_01.png}
 		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_02.png}
@@ -114,7 +115,7 @@ The animations showing the results in motion can be found on \url{https://youtu.
 		\label{fig:optical_grid_interference}
 	\end{center}	
 \end{figure}
-\begin{figure}
+\begin{figure}[hbt!]
 	\begin{center}
 		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_01_8_grid.png}
 		\includegraphics[width=0.49\textwidth]{figures/optical_grid_interference_02_8_grid.png}
@@ -123,7 +124,7 @@ The animations showing the results in motion can be found on \url{https://youtu.
 	\end{center}	
 \end{figure}
 
-\subsection{Simulating 1D particles in 3D configuration space}
+\subsection{Many-body interactions}
 
 One interesting use case of a higher dimensional \acrshort{wpd} simulator is that the higher dimensional space can be used to model the interactions between multiple lower-dimensional particles.
 For example, our 3D simulation is capable of the simulation of three 1D particles.
@@ -153,11 +154,11 @@ When all the kinetic energy of the moving particle is transferred to potential e
 The oscillation with the momentum transfer between the particles continues.
 Different phases of this simulation can be observed on the per-axis visualization in figure \ref{fig:1d_particles_in_oscillator_stages}.
 The corresponding animation can be found on \url{https://youtu.be/zOiYACVOssU}.
-\begin{figure}
+\begin{figure}[hbt!]
 	\begin{center}
-		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_01.png}
-		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_02.png}
-		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_03.png}
+		\includegraphics[width=0.45\textwidth]{figures/1d_oscillator_01.png}
+		\includegraphics[width=0.45\textwidth]{figures/1d_oscillator_02.png}
+		\includegraphics[width=0.45\textwidth]{figures/1d_oscillator_03.png}
 		\caption{Stages of the interactions between 1D particles in harmonic oscillator: initial state, particle A giving momentum to particle C, particle C reaching maximal potential and turning back}
 		\label{fig:1d_particles_in_oscillator_stages}
 	\end{center}
@@ -188,11 +189,11 @@ The measurement of the state of one entangled particle determines the outcome of
 Real-life experiments are sound with this thought experiment \cite{Vasilyev2017}.
 The probability density plot can be observed in figure \ref{fig:1d_osc_with_tunneling}.
 The animation of this simulation can be found on \url{https://youtu.be/IVb_mpzmuYA}.
-\begin{figure}
+\begin{figure}[hbt!]
 	\begin{center}
-		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_tunneling_01.png}
-		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_tunneling_02.png}
-		\includegraphics[width=0.6\textwidth]{figures/1d_oscillator_tunneling_03.png}
+		\includegraphics[width=0.45\textwidth]{figures/1d_oscillator_tunneling_01.png}
+		\includegraphics[width=0.45\textwidth]{figures/1d_oscillator_tunneling_02.png}
+		\includegraphics[width=0.45\textwidth]{figures/1d_oscillator_tunneling_03.png}
 		\caption{Stages of the interactions between 1D particles in harmonic oscillator with finite potential barrier: initial state, particle A giving momentum to particle C with approximately 0.5 probability, particle C reaching maximal potential and turning back with approximately 0.5 probability}
 		\label{fig:1d_osc_with_tunneling}
 	\end{center}	
@@ -220,7 +221,7 @@ This is used to store bits of information.
 In our model, we simulate one single cell, and this cell only stores a single bit of information.
 We only model one single electron that can be trapped on the floating gate.
 The writing and flushing of the flash cell are performed by applying voltage on the control gate, inducing a strong enough electric field that the electron can tunnel through the potential barrier between the floating gate and the channel.
-\begin{figure}
+\begin{figure}[hbt!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/flash_memory.pdf}
 	\caption{Schematic structure of a flash memory cell}
@@ -232,10 +233,10 @@ After the control gate fills with electrons, the Coulomb potential created by th
 The potential level inside the floating gate does not acquire a slope since it is made out of conducting material, hence its equipotential.
 This slope is added to the potential barrier, thus changing its shape.
 The previously rectangular barrier now acquired a triangular outline. More importantly, the $d$ width of the barrier gets reduced.
-This increases the probability of the electron in the floating gate to tunnel out from the gate through the thin oxide layer into the substrate.
+This increases the probability of the electron in the floating gate tunneling out from the gate through the thin oxide layer into the substrate.
 This phenomenon is called Fowler–Nordheim tunneling \cite{Fowler_1928bv}.
 Figure \ref{fig:fowler_nordheim_tunneling} visualizes the principle of this effect.
-\begin{figure}
+\begin{figure}[hbt!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/fowler_nordheim_tunneling.pdf}
 	\caption{Fowler-Nordheim tunneling: on the upper image there is no Coulomb potential; on the image below Coulomb potential changes the shape of potential barrier causing tunneling}
@@ -254,27 +255,52 @@ This way, the Coulomb potential induced by a negatively charged control gate act
 	V_C = \frac{\sigma}{2r\epsilon}
 \end{equation}
 where $\epsilon$ is the dielectric permittivity of the oxide, $\sigma$ is the surface charge density at the control gate, and $r$ is the distance from the control gate.
-
+Inside the floating gate, the potential stays zero.
+On the thin oxide layer between the floating gate and the substrate, the slope of the potential has to be significant enough so that the probability of tunneling increases.
+We initialized the Coulomb potential to create a steep enough slope at the start of the oxide.
+For this, we set the charge density to $600 \frac{elementary charge}{(Bohr radius)^2}$ and the thickness of the oxide between the control gate and the floating gate to $10$ Bohr radius.
+This is significant because although the gate is on equipotential, right after the gate, the Coulomb potential continues to decrease.
+For simplicity, we choose $\epsilon$ to be equal to one.
+With this setup the derivative of potential at the start of the oxide is $V' = \frac{d}{dr}\frac{\sigma}{2r\epsilon} = -\frac{\sigma}{2r^2\epsilon} = -\frac{600}{2\cdot 10^2\cdot 1} = 3\; \frac{\text{hartree}}{\text{Bohr radius}}$.
+The potential barrier between the floating gate and the substrate was chosen to be $1$ Bohr radius thick and $8$ hartree high.
+An electron inside the floating gate would have some kinetic energy, so we gave it an initial momentum of $3\; \frac{\hbar}{\text{Bohr radius}}$.
 We ran the simulation with the Coulomb potential turned on and off and compared the \textit{probability evolution} plots.
 Figure \ref{fig:flash_flush_plot} shows the flushing of the floating gate with the Coulomb potential enabled.
-The probability of the electron being found on the gate is decreasing.
-\begin{figure}
+The probability of the electron being found on the floating gate is decreasing.
+The step-like nature of the plot is caused by the bouncing of the wave packet inside the gate.
+Also, note that the probability of the particle being found inside full volume is decreasing.
+This is because we left the underside of the substrate open to prevent unwanted reflections from that barrier.
+In that direction, the tunneling particle can leave the substrate freely.
+In our simulation, the parts of the \acrshort{wp} leaving the visualized area get absorbed by the draining potential.
+At first glance, the rate at which the particle leaves the gate seems slow.
+Bear in mind that we are working with atomic units.
+Figure \ref{fig:flash_flush_plot} shows that after $40\;\frac{\hbar}{\text{hartree}} \simeq 0.96 \text{femtoseconds}$ the probability of the particle located on the gate decreased by $10\%$.
+\begin{figure}[hbt!]
 	\centering
-	\includegraphics[width=0.6\textwidth]{figures/flash_flush.png}
-	\caption{Flushing of the floating gate}
+	\includegraphics[width=0.5\textwidth]{figures/flash_flush.png}
+	\caption{Flushing of the floating gate: the probability of the particle being found on the floating gate is gradually decreasing}
 	\label{fig:flash_flush_plot}
 \end{figure}
 In figure \ref{fig:flash_keep}, however, the electron stays on the gate since we disabled the Coulomb potential.
-\begin{figure}
+\begin{figure}[hbt!]
 	\centering
-	\includegraphics[width=0.6\textwidth]{figures/flash_keep.png}
-	\caption{Storing the electron on the floating gate over a longer period of time}
+	\includegraphics[width=0.5\textwidth]{figures/flash_keep.png}
+	\caption{Storing the electron on the floating gate: there is no Fowler-Nordheim tunneling}
 	\label{fig:flash_keep}
 \end{figure}
-We also provide ray-traced visualization of the flash memory cell simulation.
-This can be observed in figure \ref{fig:flash_memory_ray_traced} and in animation form on \url{} \todo{No URL}.
+For the flushing of the gate, we also provide ray-traced visualization of the flash memory cell simulation.
+This can be observed in figure \ref{fig:flash_memory_ray_traced} and in animated form on \url{https://youtu.be/0-FTkSJgPPs?si=sl5k4ubo8XstPJ1b}.
+In these images, we only visualize the potential barrier between the control gate and floating gate (top green layer), the single electron trapped inside the floating gate (with red), and the potential barrier between the floating gate and substrate (lower green layer).
+The simulation also incorporates the remaining walls around the floating gate and the Coulomb potential.
 
-\todo{No figure about ray traced flash cell}
-
+\begin{figure}[hbt!]
+	\begin{center}
+		\includegraphics[width=0.45\textwidth]{figures/flash_memory_01.png}
+		\includegraphics[width=0.45\textwidth]{figures/flash_memory_02.png}
+		\includegraphics[width=0.45\textwidth]{figures/flash_memory_03.png}
+		\caption{Flushing a trapped electron from the floating gate of a flash memory cell: initial state; first tunneling; after multiple bounces inside the gate}
+		\label{fig:flash_memory_ray_traced}
+	\end{center}
+\end{figure}
 
 
